@@ -1,3 +1,4 @@
+import os
 import sqlite3
 import urllib
 import urllib.parse
@@ -5,6 +6,7 @@ import pandas as pd
 import newspaper_scraper as nps
 import spacy
 import numpy
+import csv
 
 # Function to extract the domain (i.e., the newspaper/source) from the URL
 from newsplease import NewsPlease
@@ -46,19 +48,21 @@ def scrape_articles(url_list):
             articles_data.append(article_data)
 
     # Convert the list of dictionaries to a pandas DataFrame
+
     df = pd.DataFrame(articles_data)
+    df.to_csv('arcitles.csv')
 
     return df
 
 
-newspapers = [{"function": nps.DeBild(db_file='articles_bild.db'), "file": "articles_bild.de", "name": "Bild"},
-              {"function": nps.DeWelt(db_file='articles_welt.db'), "file": "articles_welt.de", "name": "welt"}]
+newspapers = [{"function": nps.DeBild(db_file='articles.db'), "file": "articles_bild.de", "name": "Bild"},
+              {"function": nps.DeWelt(db_file='articles.db'), "file": "articles_welt.de", "name": "welt"}]
 
-
+# YEAR-MONTH-DAY
 def scrape_all_newspapers():
     for newspaper in newspapers:
         with newspaper["function"] as news:
-            news.index_articles_by_date_range('2023-01-01', '2023-01-02')  # CHANGE THE DATE HERE!!
+            news.index_articles_by_date_range('2023-06-01', '2023-07-01')  # CHANGE THE DATE HERE!!
             news.scrape_public_articles()
 
 
@@ -72,9 +76,9 @@ def scrape_and_analyze(name):
                              cnx)  # We do a query that returns a dataframe from the table tblArticlesIndexed
 
     df = scrape_articles(urls['URL'].head())
-    # docs = nlp.pipe(df['maintext'])
-    # displacy.render(docs,style='ent', jupyter=True)
+    #HERE The conversion?
 
 
-scrape_all_newspapers()
-scrape_and_analyze("articles_welt.db")
+#scrape_all_newspapers()
+scrape_and_analyze("articles.db")
+
