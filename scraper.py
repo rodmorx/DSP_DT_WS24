@@ -4,7 +4,7 @@ import urllib
 import urllib.parse
 import pandas as pd
 import newspaper_scraper as nps
-import spacy
+#import spacy
 import numpy
 import csv
 
@@ -40,9 +40,12 @@ def scrape_article(url):
 def scrape_articles(url_list):
     # Initialize an empty list to store scraped article data
     articles_data = []
+    url_count = 0
 
     # Loop through each URL and scrape the article
     for url in url_list:
+        print(url_count)
+        url_count += 1
         article_data = scrape_article(url)
         if article_data:
             articles_data.append(article_data)
@@ -50,23 +53,23 @@ def scrape_articles(url_list):
     # Convert the list of dictionaries to a pandas DataFrame
 
     df = pd.DataFrame(articles_data)
-    df.to_csv('arcitles.csv')
+    #df.to_csv('arcitles1.csv')
 
     return df
 
 
-newspapers = [{"function": nps.DeBild(db_file='articles.db'), "file": "articles_bild.de", "name": "Bild"},
-              {"function": nps.DeWelt(db_file='articles.db'), "file": "articles_welt.de", "name": "welt"}]
+newspapers = [{"function": nps.DeBild(db_file='articles.db1'), "file": "articles_bild.de", "name": "Bild"},
+              {"function": nps.DeWelt(db_file='articles.db1'), "file": "articles_welt.de", "name": "welt"}]
 
 # YEAR-MONTH-DAY
 def scrape_all_newspapers():
     for newspaper in newspapers:
         with newspaper["function"] as news:
-            news.index_articles_by_date_range('2023-06-01', '2023-07-01')  # CHANGE THE DATE HERE!!
+            news.index_articles_by_date_range('2023-06-01', '2023-06-02')  # CHANGE THE DATE HERE!!
             news.scrape_public_articles()
 
 
-nlp = spacy.load("de_core_news_md")
+#nlp = spacy.load("de_core_news_md")
 
 
 def scrape_and_analyze(name):
@@ -74,11 +77,16 @@ def scrape_and_analyze(name):
 
     urls = pd.read_sql_query("SELECT * FROM {}".format("tblArticlesIndexed"),
                              cnx)  # We do a query that returns a dataframe from the table tblArticlesIndexed
+    print(f"Amount of URLs: {len(urls)}")  # Check the total number of URLs
 
-    df = scrape_articles(urls['URL'].head())
+
+    df = scrape_articles(urls['URL'])  # Pass the entire column of URLs
+    print(f"Scraped articles: {len(df)}")  # Check how many articles were scraped
+    # Save the dataframe to CSV
+    df.to_csv('articles.csv', index=False)
     #HERE The conversion?
 
 
-#scrape_all_newspapers()
-scrape_and_analyze("articles.db")
+scrape_all_newspapers()
+scrape_and_analyze("articles.db1")
 
