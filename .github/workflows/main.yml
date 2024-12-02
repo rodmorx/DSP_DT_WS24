@@ -38,31 +38,36 @@ jobs:
           python -m pip install --upgrade pip
           pip install nbconvert
 
-      # Step 4: Convert Notebook to HTML
+      # Step 4: Check and Create HTML Directory
+      - name: Ensure html directory exists
+        run: |
+          mkdir -p html  # Create the html directory if it doesn't exist
+
+      # Step 5: Convert Notebook to HTML
       - name: Convert Notebook to HTML
         run: |
           jupyter nbconvert DSProjekt_DT_WS24.ipynb --to html --output html/index.html
 
-      # Step 5: Commit HTML file to the repository
+      # Step 6: Commit HTML file to the repository
       - name: Commit changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add html/index.html
-          git commit -m "Update HTML version of DSProjekt_DT_WS24.ipynb"
+          git commit -m "Create or update HTML version of DSProjekt_DT_WS24.ipynb"
           git push
 
-      # Step 6: Configure Pages environment
+      # Step 7: Configure Pages environment
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # Step 7: Upload HTML directory for deployment
+      # Step 8: Upload HTML directory for deployment
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'html'
 
-      # Step 8: Deploy to GitHub Pages
+      # Step 9: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
