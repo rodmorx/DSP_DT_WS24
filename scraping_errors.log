@@ -1,6 +1,0 @@
-ERROR:newsplease.crawler.simple_crawler:not a 200 response: 404
-ERROR:root:Error scraping https://www.bild.de/news/inland/der-eurojackpot-wurde-nicht-geknackt-die-gewinnzahlen-vom-9-4-2024-87823106.bildMobile.html: 'dict' object has no attribute 'title'
-ERROR:newsplease.crawler.simple_crawler:too many redirects: https://www.bild.de/leben-wissen/feste-feiertage/sprueche-zum-muttertag-schreiben-sie-ihr-diese-whatsapp-nachricht-662f5970def5782acea650bc
-ERROR:root:Error scraping https://www.bild.de/leben-wissen/feste-feiertage/sprueche-zum-muttertag-schreiben-sie-ihr-diese-whatsapp-nachricht-662f5970def5782acea650bc: 'dict' object has no attribute 'title'
-ERROR:newsplease.crawler.simple_crawler:not a 200 response: 500
-ERROR:root:Error scraping https://www.bild.de/regional/baden-wuerttemberg/ludwigsburg-unbekannter-verletzt-angestellte-mit-pfefferspray-665aca8ce17da0358440f04e: 'dict' object has no attribute 'title'

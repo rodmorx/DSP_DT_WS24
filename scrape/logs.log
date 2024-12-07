@@ -1,0 +1,584 @@
+[241204 11:11:31] I:49:__init__ - Initializing de_bild scraper.
+[241204 11:11:31] I:49:__init__ - Initializing de_welt scraper.
+[241204 11:11:31] I:130:_load_table - Load database from articles.db1.
+[241204 11:11:31] I:158:_load_table - Loaded 638 articles from database. 89.0% scraped and 0.0% processed.
+[241204 11:11:31] I:185:index_articles_by_date_range - Start scraping articles for 336 days (01.01.24 - 01.12.24). 0 days already indexed.
+[241204 11:11:32] I:225:index_articles_by_date_range - 1/336: Indexed 196/196 articles for 01.01.2024 (n=834).
+[241204 11:11:32] I:225:index_articles_by_date_range - 2/336: Indexed 263/263 articles for 02.01.2024 (n=1,097).
+[241204 11:11:33] I:225:index_articles_by_date_range - 3/336: Indexed 303/303 articles for 03.01.2024 (n=1,400).
+[241204 11:11:34] I:225:index_articles_by_date_range - 4/336: Indexed 311/311 articles for 04.01.2024 (n=1,711).
+[241204 11:11:34] I:225:index_articles_by_date_range - 5/336: Indexed 300/300 articles for 05.01.2024 (n=2,011).
+[241204 11:11:35] I:225:index_articles_by_date_range - 6/336: Indexed 175/175 articles for 06.01.2024 (n=2,186).
+[241204 11:11:35] I:225:index_articles_by_date_range - 7/336: Indexed 216/216 articles for 07.01.2024 (n=2,402).
+[241204 11:11:35] I:225:index_articles_by_date_range - 8/336: Indexed 295/295 articles for 08.01.2024 (n=2,697).
+[241204 11:11:36] I:225:index_articles_by_date_range - 9/336: Indexed 293/293 articles for 09.01.2024 (n=2,990).
+[241204 11:11:37] I:225:index_articles_by_date_range - 10/336: Indexed 350/350 articles for 10.01.2024 (n=3,340).
+[241204 11:12:20] I:49:__init__ - Initializing de_bild scraper.
+[241204 11:12:20] I:49:__init__ - Initializing de_welt scraper.
+[241204 11:13:02] I:49:__init__ - Initializing de_bild scraper.
+[241204 11:13:02] I:49:__init__ - Initializing de_welt scraper.
+[241204 11:13:24] I:49:__init__ - Initializing de_bild scraper.
+[241204 11:13:24] I:49:__init__ - Initializing de_welt scraper.
+[241204 11:14:37] I:49:__init__ - Initializing de_bild scraper.
+[241204 11:14:37] I:49:__init__ - Initializing de_welt scraper.
+[241204 11:14:37] I:130:_load_table - Load database from articles_24.db.
+[241204 11:14:37] I:158:_load_table - Loaded 0 articles from database. 0.0% scraped and 0.0% processed.
+[241204 11:14:37] I:185:index_articles_by_date_range - Start scraping articles for 336 days (01.01.24 - 01.12.24). 0 days already indexed.
+[241204 11:14:37] I:225:index_articles_by_date_range - 1/336: Indexed 196/196 articles for 01.01.2024 (n=196).
+[241204 11:14:37] I:225:index_articles_by_date_range - 2/336: Indexed 263/263 articles for 02.01.2024 (n=459).
+[241204 11:14:38] I:225:index_articles_by_date_range - 3/336: Indexed 303/303 articles for 03.01.2024 (n=762).
+[241204 11:14:39] I:225:index_articles_by_date_range - 4/336: Indexed 311/311 articles for 04.01.2024 (n=1,073).
+[241204 11:14:39] I:225:index_articles_by_date_range - 5/336: Indexed 300/300 articles for 05.01.2024 (n=1,373).
+[241204 11:14:39] I:225:index_articles_by_date_range - 6/336: Indexed 175/175 articles for 06.01.2024 (n=1,548).
+[241204 11:14:40] I:225:index_articles_by_date_range - 7/336: Indexed 216/216 articles for 07.01.2024 (n=1,764).
+[241204 11:14:40] I:225:index_articles_by_date_range - 8/336: Indexed 295/295 articles for 08.01.2024 (n=2,059).
+[241204 11:14:41] I:225:index_articles_by_date_range - 9/336: Indexed 293/293 articles for 09.01.2024 (n=2,352).
+[241204 11:14:41] I:225:index_articles_by_date_range - 10/336: Indexed 350/350 articles for 10.01.2024 (n=2,702).
+[241204 11:14:42] I:225:index_articles_by_date_range - 11/336: Indexed 400/400 articles for 11.01.2024 (n=3,102).
+[241204 11:14:42] I:225:index_articles_by_date_range - 12/336: Indexed 393/393 articles for 12.01.2024 (n=3,495).
+[241204 11:14:43] I:225:index_articles_by_date_range - 13/336: Indexed 199/199 articles for 13.01.2024 (n=3,694).
+[241204 11:14:43] I:225:index_articles_by_date_range - 14/336: Indexed 267/267 articles for 14.01.2024 (n=3,961).
+[241204 11:14:44] I:225:index_articles_by_date_range - 15/336: Indexed 308/308 articles for 15.01.2024 (n=4,269).
+[241204 11:14:44] I:225:index_articles_by_date_range - 16/336: Indexed 312/312 articles for 16.01.2024 (n=4,581).
+[241204 11:14:45] I:225:index_articles_by_date_range - 17/336: Indexed 398/398 articles for 17.01.2024 (n=4,979).
+[241204 11:14:46] I:225:index_articles_by_date_range - 18/336: Indexed 400/400 articles for 18.01.2024 (n=5,379).
+[241204 11:14:46] I:225:index_articles_by_date_range - 19/336: Indexed 400/400 articles for 19.01.2024 (n=5,779).
+[241204 11:14:46] I:225:index_articles_by_date_range - 20/336: Indexed 210/210 articles for 20.01.2024 (n=5,989).
+[241204 11:14:47] I:225:index_articles_by_date_range - 21/336: Indexed 239/239 articles for 21.01.2024 (n=6,228).
+[241204 11:14:47] I:225:index_articles_by_date_range - 22/336: Indexed 308/308 articles for 22.01.2024 (n=6,536).
+[241204 11:14:48] I:225:index_articles_by_date_range - 23/336: Indexed 399/399 articles for 23.01.2024 (n=6,935).
+[241204 11:14:49] I:225:index_articles_by_date_range - 24/336: Indexed 398/398 articles for 24.01.2024 (n=7,333).
+[241204 11:14:49] I:225:index_articles_by_date_range - 25/336: Indexed 361/361 articles for 25.01.2024 (n=7,694).
+[241204 11:14:50] I:225:index_articles_by_date_range - 26/336: Indexed 365/365 articles for 26.01.2024 (n=8,059).
+[241204 11:14:50] I:225:index_articles_by_date_range - 27/336: Indexed 215/215 articles for 27.01.2024 (n=8,274).
+[241204 11:14:51] I:225:index_articles_by_date_range - 28/336: Indexed 230/230 articles for 28.01.2024 (n=8,504).
+[241204 11:14:51] I:225:index_articles_by_date_range - 29/336: Indexed 318/318 articles for 29.01.2024 (n=8,822).
+[241204 11:14:52] I:225:index_articles_by_date_range - 30/336: Indexed 336/336 articles for 30.01.2024 (n=9,158).
+[241204 11:14:52] I:225:index_articles_by_date_range - 31/336: Indexed 349/349 articles for 31.01.2024 (n=9,507).
+[241204 11:14:53] I:225:index_articles_by_date_range - 32/336: Indexed 379/379 articles for 01.02.2024 (n=9,886).
+[241204 11:14:53] I:225:index_articles_by_date_range - 33/336: Indexed 400/400 articles for 02.02.2024 (n=10,286).
+[241204 11:14:54] I:225:index_articles_by_date_range - 34/336: Indexed 209/209 articles for 03.02.2024 (n=10,495).
+[241204 11:14:54] I:225:index_articles_by_date_range - 35/336: Indexed 246/246 articles for 04.02.2024 (n=10,741).
+[241204 11:14:55] I:225:index_articles_by_date_range - 36/336: Indexed 313/313 articles for 05.02.2024 (n=11,054).
+[241204 11:14:55] I:225:index_articles_by_date_range - 37/336: Indexed 345/345 articles for 06.02.2024 (n=11,399).
+[241204 11:14:56] I:225:index_articles_by_date_range - 38/336: Indexed 364/364 articles for 07.02.2024 (n=11,763).
+[241204 11:14:56] I:225:index_articles_by_date_range - 39/336: Indexed 344/344 articles for 08.02.2024 (n=12,107).
+[241204 11:14:57] I:225:index_articles_by_date_range - 40/336: Indexed 311/311 articles for 09.02.2024 (n=12,418).
+[241204 11:14:57] I:225:index_articles_by_date_range - 41/336: Indexed 213/213 articles for 10.02.2024 (n=12,631).
+[241204 11:14:57] I:225:index_articles_by_date_range - 42/336: Indexed 250/250 articles for 11.02.2024 (n=12,881).
+[241204 11:14:58] I:225:index_articles_by_date_range - 43/336: Indexed 332/332 articles for 12.02.2024 (n=13,213).
+[241204 11:14:58] I:225:index_articles_by_date_range - 44/336: Indexed 317/317 articles for 13.02.2024 (n=13,530).
+[241204 11:14:59] I:225:index_articles_by_date_range - 45/336: Indexed 389/389 articles for 14.02.2024 (n=13,919).
+[241204 11:15:00] I:225:index_articles_by_date_range - 46/336: Indexed 306/306 articles for 15.02.2024 (n=14,225).
+[241204 11:15:00] I:225:index_articles_by_date_range - 47/336: Indexed 323/323 articles for 16.02.2024 (n=14,548).
+[241204 11:15:00] I:225:index_articles_by_date_range - 48/336: Indexed 221/221 articles for 17.02.2024 (n=14,769).
+[241204 11:15:01] I:225:index_articles_by_date_range - 49/336: Indexed 272/272 articles for 18.02.2024 (n=15,041).
+[241204 11:15:01] I:225:index_articles_by_date_range - 50/336: Indexed 317/317 articles for 19.02.2024 (n=15,358).
+[241204 11:15:02] I:225:index_articles_by_date_range - 51/336: Indexed 264/264 articles for 20.02.2024 (n=15,622).
+[241204 11:15:02] I:225:index_articles_by_date_range - 52/336: Indexed 304/304 articles for 21.02.2024 (n=15,926).
+[241204 11:15:03] I:225:index_articles_by_date_range - 53/336: Indexed 367/367 articles for 22.02.2024 (n=16,293).
+[241204 11:15:03] I:225:index_articles_by_date_range - 54/336: Indexed 361/361 articles for 23.02.2024 (n=16,654).
+[241204 11:15:04] I:225:index_articles_by_date_range - 55/336: Indexed 212/212 articles for 24.02.2024 (n=16,866).
+[241204 11:15:04] I:225:index_articles_by_date_range - 56/336: Indexed 310/310 articles for 25.02.2024 (n=17,176).
+[241204 11:15:05] I:225:index_articles_by_date_range - 57/336: Indexed 320/320 articles for 26.02.2024 (n=17,496).
+[241204 11:15:05] I:225:index_articles_by_date_range - 58/336: Indexed 297/297 articles for 27.02.2024 (n=17,793).
+[241204 11:15:06] I:225:index_articles_by_date_range - 59/336: Indexed 326/326 articles for 28.02.2024 (n=18,119).
+[241204 11:15:06] I:225:index_articles_by_date_range - 60/336: Indexed 351/351 articles for 29.02.2024 (n=18,470).
+[241204 11:15:07] I:225:index_articles_by_date_range - 61/336: Indexed 373/373 articles for 01.03.2024 (n=18,843).
+[241204 11:15:07] I:225:index_articles_by_date_range - 62/336: Indexed 218/218 articles for 02.03.2024 (n=19,061).
+[241204 11:15:08] I:225:index_articles_by_date_range - 63/336: Indexed 220/220 articles for 03.03.2024 (n=19,281).
+[241204 11:15:08] I:225:index_articles_by_date_range - 64/336: Indexed 352/352 articles for 04.03.2024 (n=19,633).
+[241204 11:15:09] I:225:index_articles_by_date_range - 65/336: Indexed 322/322 articles for 05.03.2024 (n=19,955).
+[241204 11:15:09] I:225:index_articles_by_date_range - 66/336: Indexed 373/373 articles for 06.03.2024 (n=20,328).
+[241204 11:15:10] I:225:index_articles_by_date_range - 67/336: Indexed 379/379 articles for 07.03.2024 (n=20,707).
+[241204 11:15:10] I:225:index_articles_by_date_range - 68/336: Indexed 307/307 articles for 08.03.2024 (n=21,014).
+[241204 11:15:11] I:225:index_articles_by_date_range - 69/336: Indexed 169/169 articles for 09.03.2024 (n=21,183).
+[241204 11:15:11] I:225:index_articles_by_date_range - 70/336: Indexed 224/224 articles for 10.03.2024 (n=21,407).
+[241204 11:15:12] I:225:index_articles_by_date_range - 71/336: Indexed 376/376 articles for 11.03.2024 (n=21,783).
+[241204 11:15:12] I:225:index_articles_by_date_range - 72/336: Indexed 305/305 articles for 12.03.2024 (n=22,088).
+[241204 11:15:13] I:225:index_articles_by_date_range - 73/336: Indexed 327/327 articles for 13.03.2024 (n=22,415).
+[241204 11:15:13] I:225:index_articles_by_date_range - 74/336: Indexed 332/332 articles for 14.03.2024 (n=22,747).
+[241204 11:15:14] I:225:index_articles_by_date_range - 75/336: Indexed 348/348 articles for 15.03.2024 (n=23,095).
+[241204 11:15:14] I:225:index_articles_by_date_range - 76/336: Indexed 282/282 articles for 16.03.2024 (n=23,377).
+[241204 11:15:15] I:225:index_articles_by_date_range - 77/336: Indexed 259/259 articles for 17.03.2024 (n=23,636).
+[241204 11:15:15] I:225:index_articles_by_date_range - 78/336: Indexed 286/286 articles for 18.03.2024 (n=23,922).
+[241204 11:15:16] I:225:index_articles_by_date_range - 79/336: Indexed 280/280 articles for 19.03.2024 (n=24,202).
+[241204 11:15:16] I:225:index_articles_by_date_range - 80/336: Indexed 302/302 articles for 20.03.2024 (n=24,504).
+[241204 11:15:17] I:225:index_articles_by_date_range - 81/336: Indexed 321/321 articles for 21.03.2024 (n=24,825).
+[241204 11:15:17] I:225:index_articles_by_date_range - 82/336: Indexed 398/398 articles for 22.03.2024 (n=25,223).
+[241204 11:15:18] I:225:index_articles_by_date_range - 83/336: Indexed 197/197 articles for 23.03.2024 (n=25,420).
+[241204 11:15:18] I:225:index_articles_by_date_range - 84/336: Indexed 217/217 articles for 24.03.2024 (n=25,637).
+[241204 11:15:18] I:225:index_articles_by_date_range - 85/336: Indexed 269/269 articles for 25.03.2024 (n=25,906).
+[241204 11:15:19] I:225:index_articles_by_date_range - 86/336: Indexed 350/350 articles for 26.03.2024 (n=26,256).
+[241204 11:15:20] I:225:index_articles_by_date_range - 87/336: Indexed 345/345 articles for 27.03.2024 (n=26,601).
+[241204 11:15:20] I:225:index_articles_by_date_range - 88/336: Indexed 341/341 articles for 28.03.2024 (n=26,942).
+[241204 11:15:21] I:225:index_articles_by_date_range - 89/336: Indexed 272/272 articles for 29.03.2024 (n=27,214).
+[241204 11:15:21] I:225:index_articles_by_date_range - 90/336: Indexed 179/179 articles for 30.03.2024 (n=27,393).
+[241204 11:15:21] I:225:index_articles_by_date_range - 91/336: Indexed 278/278 articles for 31.03.2024 (n=27,671).
+[241204 11:15:22] I:225:index_articles_by_date_range - 92/336: Indexed 256/260 articles for 01.04.2024 (n=27,927).
+[241204 11:15:22] I:225:index_articles_by_date_range - 93/336: Indexed 270/270 articles for 02.04.2024 (n=28,197).
+[241204 11:15:23] I:225:index_articles_by_date_range - 94/336: Indexed 312/312 articles for 03.04.2024 (n=28,509).
+[241204 11:15:23] I:225:index_articles_by_date_range - 95/336: Indexed 291/291 articles for 04.04.2024 (n=28,800).
+[241204 11:15:24] I:225:index_articles_by_date_range - 96/336: Indexed 265/265 articles for 05.04.2024 (n=29,065).
+[241204 11:15:24] I:225:index_articles_by_date_range - 97/336: Indexed 265/265 articles for 06.04.2024 (n=29,330).
+[241204 11:15:25] I:225:index_articles_by_date_range - 98/336: Indexed 296/296 articles for 07.04.2024 (n=29,626).
+[241204 11:15:25] I:225:index_articles_by_date_range - 99/336: Indexed 330/330 articles for 08.04.2024 (n=29,956).
+[241204 11:15:26] I:225:index_articles_by_date_range - 100/336: Indexed 333/333 articles for 09.04.2024 (n=30,289).
+[241204 11:15:26] I:225:index_articles_by_date_range - 101/336: Indexed 330/330 articles for 10.04.2024 (n=30,619).
+[241204 11:15:27] I:225:index_articles_by_date_range - 102/336: Indexed 347/347 articles for 11.04.2024 (n=30,966).
+[241204 11:15:28] I:225:index_articles_by_date_range - 103/336: Indexed 338/338 articles for 12.04.2024 (n=31,304).
+[241204 11:15:28] I:225:index_articles_by_date_range - 104/336: Indexed 275/275 articles for 13.04.2024 (n=31,579).
+[241204 11:15:29] I:225:index_articles_by_date_range - 105/336: Indexed 268/268 articles for 14.04.2024 (n=31,847).
+[241204 11:15:29] I:225:index_articles_by_date_range - 106/336: Indexed 319/319 articles for 15.04.2024 (n=32,166).
+[241204 11:15:30] I:225:index_articles_by_date_range - 107/336: Indexed 348/348 articles for 16.04.2024 (n=32,514).
+[241204 11:15:30] I:225:index_articles_by_date_range - 108/336: Indexed 387/387 articles for 17.04.2024 (n=32,901).
+[241204 11:15:31] I:225:index_articles_by_date_range - 109/336: Indexed 376/376 articles for 18.04.2024 (n=33,277).
+[241204 11:15:31] I:225:index_articles_by_date_range - 110/336: Indexed 378/378 articles for 19.04.2024 (n=33,655).
+[241204 11:15:32] I:225:index_articles_by_date_range - 111/336: Indexed 258/258 articles for 20.04.2024 (n=33,913).
+[241204 11:15:32] I:225:index_articles_by_date_range - 112/336: Indexed 357/357 articles for 21.04.2024 (n=34,270).
+[241204 11:15:33] I:225:index_articles_by_date_range - 113/336: Indexed 372/372 articles for 22.04.2024 (n=34,642).
+[241204 11:15:33] I:225:index_articles_by_date_range - 114/336: Indexed 388/388 articles for 23.04.2024 (n=35,030).
+[241204 11:15:34] I:225:index_articles_by_date_range - 115/336: Indexed 310/310 articles for 24.04.2024 (n=35,340).
+[241204 11:15:35] I:225:index_articles_by_date_range - 116/336: Indexed 345/345 articles for 25.04.2024 (n=35,685).
+[241204 11:15:35] I:225:index_articles_by_date_range - 117/336: Indexed 356/356 articles for 26.04.2024 (n=36,041).
+[241204 11:15:36] I:225:index_articles_by_date_range - 118/336: Indexed 278/278 articles for 27.04.2024 (n=36,319).
+[241204 11:15:36] I:225:index_articles_by_date_range - 119/336: Indexed 275/275 articles for 28.04.2024 (n=36,594).
+[241204 11:15:37] I:225:index_articles_by_date_range - 120/336: Indexed 400/400 articles for 29.04.2024 (n=36,994).
+[241204 11:15:38] I:225:index_articles_by_date_range - 121/336: Indexed 320/320 articles for 30.04.2024 (n=37,314).
+[241204 11:15:38] I:225:index_articles_by_date_range - 122/336: Indexed 265/265 articles for 01.05.2024 (n=37,579).
+[241204 11:15:39] I:225:index_articles_by_date_range - 123/336: Indexed 277/277 articles for 02.05.2024 (n=37,856).
+[241204 11:15:39] I:225:index_articles_by_date_range - 124/336: Indexed 258/258 articles for 03.05.2024 (n=38,114).
+[241204 11:15:40] I:225:index_articles_by_date_range - 125/336: Indexed 313/313 articles for 04.05.2024 (n=38,427).
+[241204 11:15:40] I:225:index_articles_by_date_range - 126/336: Indexed 305/305 articles for 05.05.2024 (n=38,732).
+[241204 11:15:41] I:225:index_articles_by_date_range - 127/336: Indexed 377/377 articles for 06.05.2024 (n=39,109).
+[241204 11:15:41] I:225:index_articles_by_date_range - 128/336: Indexed 346/346 articles for 07.05.2024 (n=39,455).
+[241204 11:15:42] I:225:index_articles_by_date_range - 129/336: Indexed 343/343 articles for 08.05.2024 (n=39,798).
+[241204 11:15:43] I:225:index_articles_by_date_range - 130/336: Indexed 313/313 articles for 09.05.2024 (n=40,111).
+[241204 11:15:43] I:225:index_articles_by_date_range - 131/336: Indexed 332/332 articles for 10.05.2024 (n=40,443).
+[241204 11:15:44] I:225:index_articles_by_date_range - 132/336: Indexed 336/336 articles for 11.05.2024 (n=40,779).
+[241204 11:15:44] I:225:index_articles_by_date_range - 133/336: Indexed 300/300 articles for 12.05.2024 (n=41,079).
+[241204 11:15:45] I:225:index_articles_by_date_range - 134/336: Indexed 375/375 articles for 13.05.2024 (n=41,454).
+[241204 11:15:46] I:225:index_articles_by_date_range - 135/336: Indexed 370/370 articles for 14.05.2024 (n=41,824).
+[241204 11:15:46] I:225:index_articles_by_date_range - 136/336: Indexed 373/373 articles for 15.05.2024 (n=42,197).
+[241204 11:15:47] I:225:index_articles_by_date_range - 137/336: Indexed 400/400 articles for 16.05.2024 (n=42,597).
+[241204 11:15:47] I:225:index_articles_by_date_range - 138/336: Indexed 375/375 articles for 17.05.2024 (n=42,972).
+[241204 11:15:48] I:225:index_articles_by_date_range - 139/336: Indexed 295/295 articles for 18.05.2024 (n=43,267).
+[241204 11:15:48] I:225:index_articles_by_date_range - 140/336: Indexed 373/373 articles for 19.05.2024 (n=43,640).
+[241204 11:15:49] I:225:index_articles_by_date_range - 141/336: Indexed 290/290 articles for 20.05.2024 (n=43,930).
+[241204 11:15:49] I:225:index_articles_by_date_range - 142/336: Indexed 310/310 articles for 21.05.2024 (n=44,240).
+[241204 11:15:50] I:225:index_articles_by_date_range - 143/336: Indexed 346/346 articles for 22.05.2024 (n=44,586).
+[241204 11:15:50] I:225:index_articles_by_date_range - 144/336: Indexed 333/333 articles for 23.05.2024 (n=44,919).
+[241204 11:15:51] I:225:index_articles_by_date_range - 145/336: Indexed 318/318 articles for 24.05.2024 (n=45,237).
+[241204 11:15:51] I:225:index_articles_by_date_range - 146/336: Indexed 262/262 articles for 25.05.2024 (n=45,499).
+[241204 11:15:52] I:225:index_articles_by_date_range - 147/336: Indexed 298/298 articles for 26.05.2024 (n=45,797).
+[241204 11:15:52] I:225:index_articles_by_date_range - 148/336: Indexed 293/293 articles for 27.05.2024 (n=46,090).
+[241204 11:15:53] I:225:index_articles_by_date_range - 149/336: Indexed 379/379 articles for 28.05.2024 (n=46,469).
+[241204 11:15:54] I:225:index_articles_by_date_range - 150/336: Indexed 345/345 articles for 29.05.2024 (n=46,814).
+[241204 11:15:54] I:225:index_articles_by_date_range - 151/336: Indexed 317/317 articles for 30.05.2024 (n=47,131).
+[241204 11:15:55] I:225:index_articles_by_date_range - 152/336: Indexed 393/393 articles for 31.05.2024 (n=47,524).
+[241204 11:15:55] I:225:index_articles_by_date_range - 153/336: Indexed 264/264 articles for 01.06.2024 (n=47,788).
+[241204 11:15:56] I:225:index_articles_by_date_range - 154/336: Indexed 270/270 articles for 02.06.2024 (n=48,058).
+[241204 11:15:56] I:225:index_articles_by_date_range - 155/336: Indexed 309/309 articles for 03.06.2024 (n=48,367).
+[241204 11:15:57] I:225:index_articles_by_date_range - 156/336: Indexed 322/322 articles for 04.06.2024 (n=48,689).
+[241204 11:15:58] I:225:index_articles_by_date_range - 157/336: Indexed 352/352 articles for 05.06.2024 (n=49,041).
+[241204 11:15:58] I:225:index_articles_by_date_range - 158/336: Indexed 290/290 articles for 06.06.2024 (n=49,331).
+[241204 11:15:59] I:225:index_articles_by_date_range - 159/336: Indexed 324/324 articles for 07.06.2024 (n=49,655).
+[241204 11:15:59] I:225:index_articles_by_date_range - 160/336: Indexed 314/314 articles for 08.06.2024 (n=49,969).
+[241204 11:16:00] I:225:index_articles_by_date_range - 161/336: Indexed 400/400 articles for 09.06.2024 (n=50,369).
+[241204 11:16:00] I:225:index_articles_by_date_range - 162/336: Indexed 370/370 articles for 10.06.2024 (n=50,739).
+[241204 11:16:01] I:225:index_articles_by_date_range - 163/336: Indexed 325/325 articles for 11.06.2024 (n=51,064).
+[241204 11:16:02] I:225:index_articles_by_date_range - 164/336: Indexed 367/367 articles for 12.06.2024 (n=51,431).
+[241204 11:16:02] I:225:index_articles_by_date_range - 165/336: Indexed 335/335 articles for 13.06.2024 (n=51,766).
+[241204 11:16:03] I:225:index_articles_by_date_range - 166/336: Indexed 339/339 articles for 14.06.2024 (n=52,105).
+[241204 11:16:03] I:225:index_articles_by_date_range - 167/336: Indexed 271/271 articles for 15.06.2024 (n=52,376).
+[241204 11:16:04] I:225:index_articles_by_date_range - 168/336: Indexed 282/282 articles for 16.06.2024 (n=52,658).
+[241204 11:16:04] I:225:index_articles_by_date_range - 169/336: Indexed 400/400 articles for 17.06.2024 (n=53,058).
+[241204 11:16:05] I:225:index_articles_by_date_range - 170/336: Indexed 347/347 articles for 18.06.2024 (n=53,405).
+[241204 11:16:06] I:225:index_articles_by_date_range - 171/336: Indexed 346/346 articles for 19.06.2024 (n=53,751).
+[241204 11:16:06] I:225:index_articles_by_date_range - 172/336: Indexed 332/332 articles for 20.06.2024 (n=54,083).
+[241204 11:16:07] I:225:index_articles_by_date_range - 173/336: Indexed 376/376 articles for 21.06.2024 (n=54,459).
+[241204 11:16:07] I:225:index_articles_by_date_range - 174/336: Indexed 270/270 articles for 22.06.2024 (n=54,729).
+[241204 11:16:08] I:225:index_articles_by_date_range - 175/336: Indexed 365/365 articles for 23.06.2024 (n=55,094).
+[241204 11:16:08] I:225:index_articles_by_date_range - 176/336: Indexed 383/383 articles for 24.06.2024 (n=55,477).
+[241204 11:16:09] I:225:index_articles_by_date_range - 177/336: Indexed 340/340 articles for 25.06.2024 (n=55,817).
+[241204 11:16:10] I:225:index_articles_by_date_range - 178/336: Indexed 363/363 articles for 26.06.2024 (n=56,180).
+[241204 11:16:10] I:225:index_articles_by_date_range - 179/336: Indexed 343/343 articles for 27.06.2024 (n=56,523).
+[241204 11:16:11] I:225:index_articles_by_date_range - 180/336: Indexed 357/357 articles for 28.06.2024 (n=56,880).
+[241204 11:16:11] I:225:index_articles_by_date_range - 181/336: Indexed 205/205 articles for 29.06.2024 (n=57,085).
+[241204 11:16:12] I:225:index_articles_by_date_range - 182/336: Indexed 274/274 articles for 30.06.2024 (n=57,359).
+[241204 11:16:12] I:225:index_articles_by_date_range - 183/336: Indexed 264/264 articles for 01.07.2024 (n=57,623).
+[241204 11:16:13] I:225:index_articles_by_date_range - 184/336: Indexed 347/347 articles for 02.07.2024 (n=57,970).
+[241204 11:16:14] I:225:index_articles_by_date_range - 185/336: Indexed 332/332 articles for 03.07.2024 (n=58,302).
+[241204 11:16:14] I:225:index_articles_by_date_range - 186/336: Indexed 364/364 articles for 04.07.2024 (n=58,666).
+[241204 11:16:15] I:225:index_articles_by_date_range - 187/336: Indexed 326/326 articles for 05.07.2024 (n=58,992).
+[241204 11:16:15] I:225:index_articles_by_date_range - 188/336: Indexed 210/210 articles for 06.07.2024 (n=59,202).
+[241204 11:16:16] I:225:index_articles_by_date_range - 189/336: Indexed 317/317 articles for 07.07.2024 (n=59,519).
+[241204 11:16:16] I:225:index_articles_by_date_range - 190/336: Indexed 303/303 articles for 08.07.2024 (n=59,822).
+[241204 11:16:17] I:225:index_articles_by_date_range - 191/336: Indexed 281/281 articles for 09.07.2024 (n=60,103).
+[241204 11:16:17] I:225:index_articles_by_date_range - 192/336: Indexed 358/358 articles for 10.07.2024 (n=60,461).
+[241204 11:16:18] I:225:index_articles_by_date_range - 193/336: Indexed 324/324 articles for 11.07.2024 (n=60,785).
+[241204 11:16:18] I:225:index_articles_by_date_range - 194/336: Indexed 303/303 articles for 12.07.2024 (n=61,088).
+[241204 11:16:19] I:225:index_articles_by_date_range - 195/336: Indexed 203/203 articles for 13.07.2024 (n=61,291).
+[241204 11:16:19] I:225:index_articles_by_date_range - 196/336: Indexed 232/232 articles for 14.07.2024 (n=61,523).
+[241204 11:16:20] I:225:index_articles_by_date_range - 197/336: Indexed 355/355 articles for 15.07.2024 (n=61,878).
+[241204 11:16:20] I:225:index_articles_by_date_range - 198/336: Indexed 335/335 articles for 16.07.2024 (n=62,213).
+[241204 11:16:21] I:225:index_articles_by_date_range - 199/336: Indexed 274/274 articles for 17.07.2024 (n=62,487).
+[241204 11:16:22] I:225:index_articles_by_date_range - 200/336: Indexed 302/302 articles for 18.07.2024 (n=62,789).
+[241204 11:16:22] I:225:index_articles_by_date_range - 201/336: Indexed 275/275 articles for 19.07.2024 (n=63,064).
+[241204 11:16:23] I:225:index_articles_by_date_range - 202/336: Indexed 294/294 articles for 20.07.2024 (n=63,358).
+[241204 11:16:23] I:225:index_articles_by_date_range - 203/336: Indexed 378/378 articles for 21.07.2024 (n=63,736).
+[241204 11:16:24] I:225:index_articles_by_date_range - 204/336: Indexed 337/337 articles for 22.07.2024 (n=64,073).
+[241204 11:16:24] I:225:index_articles_by_date_range - 205/336: Indexed 282/282 articles for 23.07.2024 (n=64,355).
+[241204 11:16:25] I:225:index_articles_by_date_range - 206/336: Indexed 359/359 articles for 24.07.2024 (n=64,714).
+[241204 11:16:25] I:225:index_articles_by_date_range - 207/336: Indexed 344/344 articles for 25.07.2024 (n=65,058).
+[241204 11:16:26] I:225:index_articles_by_date_range - 208/336: Indexed 354/354 articles for 26.07.2024 (n=65,412).
+[241204 11:16:27] I:225:index_articles_by_date_range - 209/336: Indexed 261/261 articles for 27.07.2024 (n=65,673).
+[241204 11:16:27] I:225:index_articles_by_date_range - 210/336: Indexed 311/311 articles for 28.07.2024 (n=65,984).
+[241204 11:16:28] I:225:index_articles_by_date_range - 211/336: Indexed 347/347 articles for 29.07.2024 (n=66,331).
+[241204 11:16:28] I:225:index_articles_by_date_range - 212/336: Indexed 384/384 articles for 30.07.2024 (n=66,715).
+[241204 11:16:29] I:225:index_articles_by_date_range - 213/336: Indexed 322/322 articles for 31.07.2024 (n=67,037).
+[241204 11:16:30] I:225:index_articles_by_date_range - 214/336: Indexed 363/363 articles for 01.08.2024 (n=67,400).
+[241204 11:16:30] I:225:index_articles_by_date_range - 215/336: Indexed 348/348 articles for 02.08.2024 (n=67,748).
+[241204 11:16:31] I:225:index_articles_by_date_range - 216/336: Indexed 279/279 articles for 03.08.2024 (n=68,027).
+[241204 11:16:31] I:225:index_articles_by_date_range - 217/336: Indexed 400/400 articles for 04.08.2024 (n=68,427).
+[241204 11:16:32] I:225:index_articles_by_date_range - 218/336: Indexed 356/356 articles for 05.08.2024 (n=68,783).
+[241204 11:16:32] I:225:index_articles_by_date_range - 219/336: Indexed 335/335 articles for 06.08.2024 (n=69,118).
+[241204 11:16:33] I:225:index_articles_by_date_range - 220/336: Indexed 358/358 articles for 07.08.2024 (n=69,476).
+[241204 11:16:34] I:225:index_articles_by_date_range - 221/336: Indexed 290/290 articles for 08.08.2024 (n=69,766).
+[241204 11:16:34] I:225:index_articles_by_date_range - 222/336: Indexed 268/268 articles for 09.08.2024 (n=70,034).
+[241204 11:16:35] I:225:index_articles_by_date_range - 223/336: Indexed 334/334 articles for 10.08.2024 (n=70,368).
+[241204 11:16:35] I:225:index_articles_by_date_range - 224/336: Indexed 294/294 articles for 11.08.2024 (n=70,662).
+[241204 11:16:36] I:225:index_articles_by_date_range - 225/336: Indexed 322/322 articles for 12.08.2024 (n=70,984).
+[241204 11:16:36] I:225:index_articles_by_date_range - 226/336: Indexed 289/289 articles for 13.08.2024 (n=71,273).
+[241204 11:16:37] I:225:index_articles_by_date_range - 227/336: Indexed 400/400 articles for 14.08.2024 (n=71,673).
+[241204 11:16:39] I:225:index_articles_by_date_range - 228/336: Indexed 352/352 articles for 15.08.2024 (n=72,025).
+[241204 11:16:39] I:225:index_articles_by_date_range - 229/336: Indexed 227/227 articles for 16.08.2024 (n=72,252).
+[241204 11:16:40] I:225:index_articles_by_date_range - 230/336: Indexed 267/267 articles for 17.08.2024 (n=72,519).
+[241204 11:16:40] I:225:index_articles_by_date_range - 231/336: Indexed 400/400 articles for 18.08.2024 (n=72,919).
+[241204 11:16:41] I:225:index_articles_by_date_range - 232/336: Indexed 400/400 articles for 19.08.2024 (n=73,319).
+[241204 11:16:42] I:225:index_articles_by_date_range - 233/336: Indexed 246/246 articles for 20.08.2024 (n=73,565).
+[241204 11:16:42] I:225:index_articles_by_date_range - 234/336: Indexed 400/400 articles for 21.08.2024 (n=73,965).
+[241204 11:16:43] I:225:index_articles_by_date_range - 235/336: Indexed 325/325 articles for 22.08.2024 (n=74,290).
+[241204 11:16:44] I:225:index_articles_by_date_range - 236/336: Indexed 371/371 articles for 23.08.2024 (n=74,661).
+[241204 11:16:44] I:225:index_articles_by_date_range - 237/336: Indexed 258/258 articles for 24.08.2024 (n=74,919).
+[241204 11:16:45] I:225:index_articles_by_date_range - 238/336: Indexed 400/400 articles for 25.08.2024 (n=75,319).
+[241204 11:16:45] I:225:index_articles_by_date_range - 239/336: Indexed 333/333 articles for 26.08.2024 (n=75,652).
+[241204 11:16:46] I:225:index_articles_by_date_range - 240/336: Indexed 391/391 articles for 27.08.2024 (n=76,043).
+[241204 11:16:47] I:225:index_articles_by_date_range - 241/336: Indexed 400/400 articles for 28.08.2024 (n=76,443).
+[241204 11:16:47] I:225:index_articles_by_date_range - 242/336: Indexed 400/400 articles for 29.08.2024 (n=76,843).
+[241204 11:16:48] I:225:index_articles_by_date_range - 243/336: Indexed 396/396 articles for 30.08.2024 (n=77,239).
+[241204 11:16:49] I:225:index_articles_by_date_range - 244/336: Indexed 354/354 articles for 31.08.2024 (n=77,593).
+[241204 11:16:49] I:225:index_articles_by_date_range - 245/336: Indexed 400/400 articles for 01.09.2024 (n=77,993).
+[241204 11:16:50] I:225:index_articles_by_date_range - 246/336: Indexed 373/373 articles for 02.09.2024 (n=78,366).
+[241204 11:16:50] I:225:index_articles_by_date_range - 247/336: Indexed 267/267 articles for 03.09.2024 (n=78,633).
+[241204 11:16:51] I:225:index_articles_by_date_range - 248/336: Indexed 266/266 articles for 04.09.2024 (n=78,899).
+[241204 11:16:51] I:225:index_articles_by_date_range - 249/336: Indexed 330/330 articles for 05.09.2024 (n=79,229).
+[241204 11:16:52] I:225:index_articles_by_date_range - 250/336: Indexed 315/315 articles for 06.09.2024 (n=79,544).
+[241204 11:16:53] I:225:index_articles_by_date_range - 251/336: Indexed 233/233 articles for 07.09.2024 (n=79,777).
+[241204 11:16:53] I:225:index_articles_by_date_range - 252/336: Indexed 400/400 articles for 08.09.2024 (n=80,177).
+[241204 11:16:54] I:225:index_articles_by_date_range - 253/336: Indexed 345/345 articles for 09.09.2024 (n=80,522).
+[241204 11:16:54] I:225:index_articles_by_date_range - 254/336: Indexed 309/309 articles for 10.09.2024 (n=80,831).
+[241204 11:16:55] I:225:index_articles_by_date_range - 255/336: Indexed 334/334 articles for 11.09.2024 (n=81,165).
+[241204 11:16:56] I:225:index_articles_by_date_range - 256/336: Indexed 361/361 articles for 12.09.2024 (n=81,526).
+[241204 11:16:56] I:225:index_articles_by_date_range - 257/336: Indexed 270/270 articles for 13.09.2024 (n=81,796).
+[241204 11:16:57] I:225:index_articles_by_date_range - 258/336: Indexed 255/255 articles for 14.09.2024 (n=82,051).
+[241204 11:16:57] I:225:index_articles_by_date_range - 259/336: Indexed 357/357 articles for 15.09.2024 (n=82,408).
+[241204 11:16:58] I:225:index_articles_by_date_range - 260/336: Indexed 352/352 articles for 16.09.2024 (n=82,760).
+[241204 11:16:58] I:225:index_articles_by_date_range - 261/336: Indexed 343/343 articles for 17.09.2024 (n=83,103).
+[241204 11:16:59] I:225:index_articles_by_date_range - 262/336: Indexed 353/353 articles for 18.09.2024 (n=83,456).
+[241204 11:17:00] I:225:index_articles_by_date_range - 263/336: Indexed 325/325 articles for 19.09.2024 (n=83,781).
+[241204 11:17:00] I:225:index_articles_by_date_range - 264/336: Indexed 344/344 articles for 20.09.2024 (n=84,125).
+[241204 11:17:01] I:225:index_articles_by_date_range - 265/336: Indexed 316/316 articles for 21.09.2024 (n=84,441).
+[241204 11:17:02] I:225:index_articles_by_date_range - 266/336: Indexed 392/392 articles for 22.09.2024 (n=84,833).
+[241204 11:17:02] I:225:index_articles_by_date_range - 267/336: Indexed 295/295 articles for 23.09.2024 (n=85,128).
+[241204 11:17:03] I:225:index_articles_by_date_range - 268/336: Indexed 280/280 articles for 24.09.2024 (n=85,408).
+[241204 11:17:03] I:225:index_articles_by_date_range - 269/336: Indexed 289/289 articles for 25.09.2024 (n=85,697).
+[241204 11:17:04] I:225:index_articles_by_date_range - 270/336: Indexed 324/324 articles for 26.09.2024 (n=86,021).
+[241204 11:17:05] I:225:index_articles_by_date_range - 271/336: Indexed 318/318 articles for 27.09.2024 (n=86,339).
+[241204 11:17:05] I:225:index_articles_by_date_range - 272/336: Indexed 265/265 articles for 28.09.2024 (n=86,604).
+[241204 11:17:06] I:225:index_articles_by_date_range - 273/336: Indexed 400/400 articles for 29.09.2024 (n=87,004).
+[241204 11:17:06] I:225:index_articles_by_date_range - 274/336: Indexed 377/377 articles for 30.09.2024 (n=87,381).
+[241204 11:17:07] I:225:index_articles_by_date_range - 275/336: Indexed 349/349 articles for 01.10.2024 (n=87,730).
+[241204 11:17:08] I:225:index_articles_by_date_range - 276/336: Indexed 351/351 articles for 02.10.2024 (n=88,081).
+[241204 11:17:08] I:225:index_articles_by_date_range - 277/336: Indexed 219/219 articles for 03.10.2024 (n=88,300).
+[241204 11:17:09] I:225:index_articles_by_date_range - 278/336: Indexed 322/322 articles for 04.10.2024 (n=88,622).
+[241204 11:17:09] I:225:index_articles_by_date_range - 279/336: Indexed 270/270 articles for 05.10.2024 (n=88,892).
+[241204 11:17:10] I:225:index_articles_by_date_range - 280/336: Indexed 400/400 articles for 06.10.2024 (n=89,292).
+[241204 11:17:11] I:225:index_articles_by_date_range - 281/336: Indexed 386/386 articles for 07.10.2024 (n=89,678).
+[241204 11:17:11] I:225:index_articles_by_date_range - 282/336: Indexed 327/327 articles for 08.10.2024 (n=90,005).
+[241204 11:17:12] I:225:index_articles_by_date_range - 283/336: Indexed 336/336 articles for 09.10.2024 (n=90,341).
+[241204 11:17:12] I:225:index_articles_by_date_range - 284/336: Indexed 316/316 articles for 10.10.2024 (n=90,657).
+[241204 11:17:13] I:225:index_articles_by_date_range - 285/336: Indexed 285/285 articles for 11.10.2024 (n=90,942).
+[241204 11:17:14] I:225:index_articles_by_date_range - 286/336: Indexed 284/284 articles for 12.10.2024 (n=91,226).
+[241204 11:17:14] I:225:index_articles_by_date_range - 287/336: Indexed 290/290 articles for 13.10.2024 (n=91,516).
+[241204 11:17:15] I:225:index_articles_by_date_range - 288/336: Indexed 354/354 articles for 14.10.2024 (n=91,870).
+[241204 11:17:15] I:225:index_articles_by_date_range - 289/336: Indexed 243/243 articles for 15.10.2024 (n=92,113).
+[241204 11:17:16] I:225:index_articles_by_date_range - 290/336: Indexed 275/275 articles for 16.10.2024 (n=92,388).
+[241204 11:17:17] I:225:index_articles_by_date_range - 291/336: Indexed 329/329 articles for 17.10.2024 (n=92,717).
+[241204 11:17:17] I:225:index_articles_by_date_range - 292/336: Indexed 274/274 articles for 18.10.2024 (n=92,991).
+[241204 11:17:18] I:225:index_articles_by_date_range - 293/336: Indexed 302/302 articles for 19.10.2024 (n=93,293).
+[241204 11:17:18] I:225:index_articles_by_date_range - 294/336: Indexed 400/400 articles for 20.10.2024 (n=93,693).
+[241204 11:17:19] I:225:index_articles_by_date_range - 295/336: Indexed 373/373 articles for 21.10.2024 (n=94,066).
+[241204 11:17:20] I:225:index_articles_by_date_range - 296/336: Indexed 316/316 articles for 22.10.2024 (n=94,382).
+[241204 11:17:20] I:225:index_articles_by_date_range - 297/336: Indexed 366/366 articles for 23.10.2024 (n=94,748).
+[241204 11:17:21] I:225:index_articles_by_date_range - 298/336: Indexed 303/303 articles for 24.10.2024 (n=95,051).
+[241204 11:17:21] I:225:index_articles_by_date_range - 299/336: Indexed 329/329 articles for 25.10.2024 (n=95,380).
+[241204 11:17:22] I:225:index_articles_by_date_range - 300/336: Indexed 369/369 articles for 26.10.2024 (n=95,749).
+[241204 11:17:23] I:225:index_articles_by_date_range - 301/336: Indexed 298/298 articles for 27.10.2024 (n=96,047).
+[241204 11:17:23] I:225:index_articles_by_date_range - 302/336: Indexed 393/393 articles for 28.10.2024 (n=96,440).
+[241204 11:17:24] I:225:index_articles_by_date_range - 303/336: Indexed 318/318 articles for 29.10.2024 (n=96,758).
+[241204 11:17:25] I:225:index_articles_by_date_range - 304/336: Indexed 332/332 articles for 30.10.2024 (n=97,090).
+[241204 11:17:25] I:225:index_articles_by_date_range - 305/336: Indexed 339/339 articles for 31.10.2024 (n=97,429).
+[241204 11:17:26] I:225:index_articles_by_date_range - 306/336: Indexed 300/300 articles for 01.11.2024 (n=97,729).
+[241204 11:17:26] I:225:index_articles_by_date_range - 307/336: Indexed 270/270 articles for 02.11.2024 (n=97,999).
+[241204 11:17:27] I:225:index_articles_by_date_range - 308/336: Indexed 400/400 articles for 03.11.2024 (n=98,399).
+[241204 11:17:28] I:225:index_articles_by_date_range - 309/336: Indexed 385/385 articles for 04.11.2024 (n=98,784).
+[241204 11:17:28] I:225:index_articles_by_date_range - 310/336: Indexed 400/400 articles for 05.11.2024 (n=99,184).
+[241204 11:17:29] I:225:index_articles_by_date_range - 311/336: Indexed 364/364 articles for 06.11.2024 (n=99,548).
+[241204 11:17:30] I:225:index_articles_by_date_range - 312/336: Indexed 380/380 articles for 07.11.2024 (n=99,928).
+[241204 11:17:30] I:225:index_articles_by_date_range - 313/336: Indexed 322/322 articles for 08.11.2024 (n=100,250).
+[241204 11:17:31] I:225:index_articles_by_date_range - 314/336: Indexed 347/347 articles for 09.11.2024 (n=100,597).
+[241204 11:17:32] I:225:index_articles_by_date_range - 315/336: Indexed 350/350 articles for 10.11.2024 (n=100,947).
+[241204 11:17:33] I:225:index_articles_by_date_range - 316/336: Indexed 371/371 articles for 11.11.2024 (n=101,318).
+[241204 11:17:33] I:225:index_articles_by_date_range - 317/336: Indexed 302/302 articles for 12.11.2024 (n=101,620).
+[241204 11:17:34] I:225:index_articles_by_date_range - 318/336: Indexed 340/340 articles for 13.11.2024 (n=101,960).
+[241204 11:17:34] I:225:index_articles_by_date_range - 319/336: Indexed 361/361 articles for 14.11.2024 (n=102,321).
+[241204 11:17:35] I:225:index_articles_by_date_range - 320/336: Indexed 321/321 articles for 15.11.2024 (n=102,642).
+[241204 11:17:36] I:225:index_articles_by_date_range - 321/336: Indexed 250/250 articles for 16.11.2024 (n=102,892).
+[241204 11:17:36] I:225:index_articles_by_date_range - 322/336: Indexed 307/307 articles for 17.11.2024 (n=103,199).
+[241204 11:17:37] I:225:index_articles_by_date_range - 323/336: Indexed 379/379 articles for 18.11.2024 (n=103,578).
+[241204 11:17:38] I:225:index_articles_by_date_range - 324/336: Indexed 336/336 articles for 19.11.2024 (n=103,914).
+[241204 11:17:40] I:225:index_articles_by_date_range - 325/336: Indexed 345/345 articles for 20.11.2024 (n=104,259).
+[241204 11:17:41] I:225:index_articles_by_date_range - 326/336: Indexed 262/262 articles for 21.11.2024 (n=104,521).
+[241204 11:17:41] I:225:index_articles_by_date_range - 327/336: Indexed 329/329 articles for 22.11.2024 (n=104,850).
+[241204 11:17:42] I:225:index_articles_by_date_range - 328/336: Indexed 280/280 articles for 23.11.2024 (n=105,130).
+[241204 11:17:43] I:225:index_articles_by_date_range - 329/336: Indexed 344/344 articles for 24.11.2024 (n=105,474).
+[241204 11:17:43] I:225:index_articles_by_date_range - 330/336: Indexed 365/365 articles for 25.11.2024 (n=105,839).
+[241204 11:17:44] I:225:index_articles_by_date_range - 331/336: Indexed 313/313 articles for 26.11.2024 (n=106,152).
+[241204 11:17:45] I:225:index_articles_by_date_range - 332/336: Indexed 305/305 articles for 27.11.2024 (n=106,457).
+[241204 11:17:45] I:225:index_articles_by_date_range - 333/336: Indexed 296/296 articles for 28.11.2024 (n=106,753).
+[241204 11:17:46] I:225:index_articles_by_date_range - 334/336: Indexed 295/295 articles for 29.11.2024 (n=107,048).
+[241204 11:17:46] I:225:index_articles_by_date_range - 335/336: Indexed 362/362 articles for 30.11.2024 (n=107,410).
+[241204 11:17:47] I:225:index_articles_by_date_range - 336/336: Indexed 307/307 articles for 01.12.2024 (n=107,717).
+[241204 11:17:47] I:331:scrape_public_articles - Start scraping 107,717 public articles.
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: MetaDescription
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: MetaLang
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: MetaKeywords
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: MetaFavicon
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: MetaCanonical
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: MetaEncoding
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: Image
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: Domain
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: Title
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: Text
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: OpengraphSiteName
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: OpengraphType
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: OpengraphTitle
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: OpengraphUrl
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: OpengraphDescription
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: OpengraphImage
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: Tags
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: Tweets
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: Movies
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: Links
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: Authors
+[241204 11:17:47] I:345:scrape_public_articles - New feature detected: PublishDate
+[241204 11:18:08] I:345:scrape_public_articles - New feature detected: OpengraphVideo
+[241204 11:31:40] I:49:__init__ - Initializing de_bild scraper.
+[241204 11:31:40] I:49:__init__ - Initializing de_welt scraper.
+[241204 11:31:40] I:130:_load_table - Load database from articles_24.db.
+[241204 11:31:42] I:158:_load_table - Loaded 107,717 articles from database. 2.1% scraped and 0.0% processed.
+[241204 11:31:42] I:182:index_articles_by_date_range - No new days to scrape. Pass skip_existing=False to scrape all days again.
+[241204 11:31:42] I:331:scrape_public_articles - Start scraping 105,194 public articles.
+[241204 11:32:34] I:49:__init__ - Initializing de_bild scraper.
+[241204 11:32:34] I:49:__init__ - Initializing de_welt scraper.
+[241204 11:32:35] I:130:_load_table - Load database from articles_24.db.
+[241204 11:32:35] I:158:_load_table - Loaded 0 articles from database. 0.0% scraped and 0.0% processed.
+[241204 11:32:35] I:185:index_articles_by_date_range - Start scraping articles for 153 days (01.01.24 - 01.06.24). 0 days already indexed.
+[241204 11:32:35] I:225:index_articles_by_date_range - 1/153: Indexed 196/196 articles for 01.01.2024 (n=196).
+[241204 11:32:36] I:225:index_articles_by_date_range - 2/153: Indexed 263/263 articles for 02.01.2024 (n=459).
+[241204 11:32:36] I:225:index_articles_by_date_range - 3/153: Indexed 303/303 articles for 03.01.2024 (n=762).
+[241204 11:32:37] I:225:index_articles_by_date_range - 4/153: Indexed 311/311 articles for 04.01.2024 (n=1,073).
+[241204 11:32:37] I:225:index_articles_by_date_range - 5/153: Indexed 300/300 articles for 05.01.2024 (n=1,373).
+[241204 11:32:38] I:225:index_articles_by_date_range - 6/153: Indexed 175/175 articles for 06.01.2024 (n=1,548).
+[241204 11:32:38] I:225:index_articles_by_date_range - 7/153: Indexed 216/216 articles for 07.01.2024 (n=1,764).
+[241204 11:32:39] I:225:index_articles_by_date_range - 8/153: Indexed 295/295 articles for 08.01.2024 (n=2,059).
+[241204 11:32:39] I:225:index_articles_by_date_range - 9/153: Indexed 293/293 articles for 09.01.2024 (n=2,352).
+[241204 11:32:40] I:225:index_articles_by_date_range - 10/153: Indexed 350/350 articles for 10.01.2024 (n=2,702).
+[241204 11:32:40] I:225:index_articles_by_date_range - 11/153: Indexed 400/400 articles for 11.01.2024 (n=3,102).
+[241204 11:32:41] I:225:index_articles_by_date_range - 12/153: Indexed 393/393 articles for 12.01.2024 (n=3,495).
+[241204 11:32:41] I:225:index_articles_by_date_range - 13/153: Indexed 199/199 articles for 13.01.2024 (n=3,694).
+[241204 11:32:41] I:225:index_articles_by_date_range - 14/153: Indexed 267/267 articles for 14.01.2024 (n=3,961).
+[241204 11:32:42] I:225:index_articles_by_date_range - 15/153: Indexed 308/308 articles for 15.01.2024 (n=4,269).
+[241204 11:32:43] I:225:index_articles_by_date_range - 16/153: Indexed 312/312 articles for 16.01.2024 (n=4,581).
+[241204 11:32:43] I:225:index_articles_by_date_range - 17/153: Indexed 398/398 articles for 17.01.2024 (n=4,979).
+[241204 11:32:44] I:225:index_articles_by_date_range - 18/153: Indexed 400/400 articles for 18.01.2024 (n=5,379).
+[241204 11:32:44] I:225:index_articles_by_date_range - 19/153: Indexed 400/400 articles for 19.01.2024 (n=5,779).
+[241204 11:32:45] I:225:index_articles_by_date_range - 20/153: Indexed 210/210 articles for 20.01.2024 (n=5,989).
+[241204 11:32:45] I:225:index_articles_by_date_range - 21/153: Indexed 239/239 articles for 21.01.2024 (n=6,228).
+[241204 11:32:46] I:225:index_articles_by_date_range - 22/153: Indexed 308/308 articles for 22.01.2024 (n=6,536).
+[241204 11:32:46] I:225:index_articles_by_date_range - 23/153: Indexed 399/399 articles for 23.01.2024 (n=6,935).
+[241204 11:32:47] I:225:index_articles_by_date_range - 24/153: Indexed 398/398 articles for 24.01.2024 (n=7,333).
+[241204 11:32:48] I:225:index_articles_by_date_range - 25/153: Indexed 361/361 articles for 25.01.2024 (n=7,694).
+[241204 11:32:48] I:225:index_articles_by_date_range - 26/153: Indexed 365/365 articles for 26.01.2024 (n=8,059).
+[241204 11:32:49] I:225:index_articles_by_date_range - 27/153: Indexed 215/215 articles for 27.01.2024 (n=8,274).
+[241204 11:32:49] I:225:index_articles_by_date_range - 28/153: Indexed 230/230 articles for 28.01.2024 (n=8,504).
+[241204 11:32:49] I:225:index_articles_by_date_range - 29/153: Indexed 318/318 articles for 29.01.2024 (n=8,822).
+[241204 11:32:50] I:225:index_articles_by_date_range - 30/153: Indexed 336/336 articles for 30.01.2024 (n=9,158).
+[241204 11:32:51] I:225:index_articles_by_date_range - 31/153: Indexed 349/349 articles for 31.01.2024 (n=9,507).
+[241204 11:32:51] I:225:index_articles_by_date_range - 32/153: Indexed 379/379 articles for 01.02.2024 (n=9,886).
+[241204 11:32:52] I:225:index_articles_by_date_range - 33/153: Indexed 400/400 articles for 02.02.2024 (n=10,286).
+[241204 11:32:52] I:225:index_articles_by_date_range - 34/153: Indexed 209/209 articles for 03.02.2024 (n=10,495).
+[241204 11:32:53] I:225:index_articles_by_date_range - 35/153: Indexed 246/246 articles for 04.02.2024 (n=10,741).
+[241204 11:32:53] I:225:index_articles_by_date_range - 36/153: Indexed 313/313 articles for 05.02.2024 (n=11,054).
+[241204 11:32:54] I:225:index_articles_by_date_range - 37/153: Indexed 345/345 articles for 06.02.2024 (n=11,399).
+[241204 11:32:54] I:225:index_articles_by_date_range - 38/153: Indexed 364/364 articles for 07.02.2024 (n=11,763).
+[241204 11:32:55] I:225:index_articles_by_date_range - 39/153: Indexed 344/344 articles for 08.02.2024 (n=12,107).
+[241204 11:32:56] I:225:index_articles_by_date_range - 40/153: Indexed 311/311 articles for 09.02.2024 (n=12,418).
+[241204 11:32:56] I:225:index_articles_by_date_range - 41/153: Indexed 213/213 articles for 10.02.2024 (n=12,631).
+[241204 11:32:56] I:225:index_articles_by_date_range - 42/153: Indexed 250/250 articles for 11.02.2024 (n=12,881).
+[241204 11:32:57] I:225:index_articles_by_date_range - 43/153: Indexed 332/332 articles for 12.02.2024 (n=13,213).
+[241204 11:32:58] I:225:index_articles_by_date_range - 44/153: Indexed 317/317 articles for 13.02.2024 (n=13,530).
+[241204 11:32:58] I:225:index_articles_by_date_range - 45/153: Indexed 389/389 articles for 14.02.2024 (n=13,919).
+[241204 11:32:59] I:225:index_articles_by_date_range - 46/153: Indexed 306/306 articles for 15.02.2024 (n=14,225).
+[241204 11:32:59] I:225:index_articles_by_date_range - 47/153: Indexed 323/323 articles for 16.02.2024 (n=14,548).
+[241204 11:33:00] I:225:index_articles_by_date_range - 48/153: Indexed 221/221 articles for 17.02.2024 (n=14,769).
+[241204 11:33:00] I:225:index_articles_by_date_range - 49/153: Indexed 272/272 articles for 18.02.2024 (n=15,041).
+[241204 11:33:01] I:225:index_articles_by_date_range - 50/153: Indexed 317/317 articles for 19.02.2024 (n=15,358).
+[241204 11:33:01] I:225:index_articles_by_date_range - 51/153: Indexed 264/264 articles for 20.02.2024 (n=15,622).
+[241204 11:33:01] I:225:index_articles_by_date_range - 52/153: Indexed 304/304 articles for 21.02.2024 (n=15,926).
+[241204 11:33:02] I:225:index_articles_by_date_range - 53/153: Indexed 367/367 articles for 22.02.2024 (n=16,293).
+[241204 11:33:03] I:225:index_articles_by_date_range - 54/153: Indexed 361/361 articles for 23.02.2024 (n=16,654).
+[241204 11:33:03] I:225:index_articles_by_date_range - 55/153: Indexed 212/212 articles for 24.02.2024 (n=16,866).
+[241204 11:33:03] I:225:index_articles_by_date_range - 56/153: Indexed 310/310 articles for 25.02.2024 (n=17,176).
+[241204 11:33:04] I:225:index_articles_by_date_range - 57/153: Indexed 320/320 articles for 26.02.2024 (n=17,496).
+[241204 11:33:04] I:225:index_articles_by_date_range - 58/153: Indexed 297/297 articles for 27.02.2024 (n=17,793).
+[241204 11:33:05] I:225:index_articles_by_date_range - 59/153: Indexed 326/326 articles for 28.02.2024 (n=18,119).
+[241204 11:33:05] I:225:index_articles_by_date_range - 60/153: Indexed 351/351 articles for 29.02.2024 (n=18,470).
+[241204 11:33:06] I:225:index_articles_by_date_range - 61/153: Indexed 373/373 articles for 01.03.2024 (n=18,843).
+[241204 11:33:06] I:225:index_articles_by_date_range - 62/153: Indexed 218/218 articles for 02.03.2024 (n=19,061).
+[241204 11:33:07] I:225:index_articles_by_date_range - 63/153: Indexed 220/220 articles for 03.03.2024 (n=19,281).
+[241204 11:33:07] I:225:index_articles_by_date_range - 64/153: Indexed 352/352 articles for 04.03.2024 (n=19,633).
+[241204 11:33:08] I:225:index_articles_by_date_range - 65/153: Indexed 322/322 articles for 05.03.2024 (n=19,955).
+[241204 11:33:08] I:225:index_articles_by_date_range - 66/153: Indexed 373/373 articles for 06.03.2024 (n=20,328).
+[241204 11:33:09] I:225:index_articles_by_date_range - 67/153: Indexed 379/379 articles for 07.03.2024 (n=20,707).
+[241204 11:33:09] I:225:index_articles_by_date_range - 68/153: Indexed 307/307 articles for 08.03.2024 (n=21,014).
+[241204 11:33:10] I:225:index_articles_by_date_range - 69/153: Indexed 169/169 articles for 09.03.2024 (n=21,183).
+[241204 11:33:10] I:225:index_articles_by_date_range - 70/153: Indexed 224/224 articles for 10.03.2024 (n=21,407).
+[241204 11:33:11] I:225:index_articles_by_date_range - 71/153: Indexed 376/376 articles for 11.03.2024 (n=21,783).
+[241204 11:33:11] I:225:index_articles_by_date_range - 72/153: Indexed 305/305 articles for 12.03.2024 (n=22,088).
+[241204 11:33:12] I:225:index_articles_by_date_range - 73/153: Indexed 327/327 articles for 13.03.2024 (n=22,415).
+[241204 11:33:12] I:225:index_articles_by_date_range - 74/153: Indexed 332/332 articles for 14.03.2024 (n=22,747).
+[241204 11:33:13] I:225:index_articles_by_date_range - 75/153: Indexed 348/348 articles for 15.03.2024 (n=23,095).
+[241204 11:33:14] I:225:index_articles_by_date_range - 76/153: Indexed 282/282 articles for 16.03.2024 (n=23,377).
+[241204 11:33:14] I:225:index_articles_by_date_range - 77/153: Indexed 259/259 articles for 17.03.2024 (n=23,636).
+[241204 11:33:15] I:225:index_articles_by_date_range - 78/153: Indexed 286/286 articles for 18.03.2024 (n=23,922).
+[241204 11:33:15] I:225:index_articles_by_date_range - 79/153: Indexed 280/280 articles for 19.03.2024 (n=24,202).
+[241204 11:33:16] I:225:index_articles_by_date_range - 80/153: Indexed 302/302 articles for 20.03.2024 (n=24,504).
+[241204 11:33:16] I:225:index_articles_by_date_range - 81/153: Indexed 321/321 articles for 21.03.2024 (n=24,825).
+[241204 11:33:17] I:225:index_articles_by_date_range - 82/153: Indexed 398/398 articles for 22.03.2024 (n=25,223).
+[241204 11:33:17] I:225:index_articles_by_date_range - 83/153: Indexed 197/197 articles for 23.03.2024 (n=25,420).
+[241204 11:33:18] I:225:index_articles_by_date_range - 84/153: Indexed 217/217 articles for 24.03.2024 (n=25,637).
+[241204 11:33:18] I:225:index_articles_by_date_range - 85/153: Indexed 269/269 articles for 25.03.2024 (n=25,906).
+[241204 11:33:19] I:225:index_articles_by_date_range - 86/153: Indexed 350/350 articles for 26.03.2024 (n=26,256).
+[241204 11:33:19] I:225:index_articles_by_date_range - 87/153: Indexed 345/345 articles for 27.03.2024 (n=26,601).
+[241204 11:33:20] I:225:index_articles_by_date_range - 88/153: Indexed 341/341 articles for 28.03.2024 (n=26,942).
+[241204 11:33:21] I:225:index_articles_by_date_range - 89/153: Indexed 272/272 articles for 29.03.2024 (n=27,214).
+[241204 11:33:21] I:225:index_articles_by_date_range - 90/153: Indexed 179/179 articles for 30.03.2024 (n=27,393).
+[241204 11:33:22] I:225:index_articles_by_date_range - 91/153: Indexed 278/278 articles for 31.03.2024 (n=27,671).
+[241204 11:33:22] I:225:index_articles_by_date_range - 92/153: Indexed 256/260 articles for 01.04.2024 (n=27,927).
+[241204 11:33:23] I:225:index_articles_by_date_range - 93/153: Indexed 270/270 articles for 02.04.2024 (n=28,197).
+[241204 11:33:23] I:225:index_articles_by_date_range - 94/153: Indexed 312/312 articles for 03.04.2024 (n=28,509).
+[241204 11:33:24] I:225:index_articles_by_date_range - 95/153: Indexed 291/291 articles for 04.04.2024 (n=28,800).
+[241204 11:33:24] I:225:index_articles_by_date_range - 96/153: Indexed 265/265 articles for 05.04.2024 (n=29,065).
+[241204 11:33:25] I:225:index_articles_by_date_range - 97/153: Indexed 265/265 articles for 06.04.2024 (n=29,330).
+[241204 11:33:26] I:225:index_articles_by_date_range - 98/153: Indexed 296/296 articles for 07.04.2024 (n=29,626).
+[241204 11:33:26] I:225:index_articles_by_date_range - 99/153: Indexed 330/330 articles for 08.04.2024 (n=29,956).
+[241204 11:33:27] I:225:index_articles_by_date_range - 100/153: Indexed 333/333 articles for 09.04.2024 (n=30,289).
+[241204 11:33:27] I:225:index_articles_by_date_range - 101/153: Indexed 330/330 articles for 10.04.2024 (n=30,619).
+[241204 11:33:28] I:225:index_articles_by_date_range - 102/153: Indexed 347/347 articles for 11.04.2024 (n=30,966).
+[241204 11:33:28] I:225:index_articles_by_date_range - 103/153: Indexed 338/338 articles for 12.04.2024 (n=31,304).
+[241204 11:33:29] I:225:index_articles_by_date_range - 104/153: Indexed 275/275 articles for 13.04.2024 (n=31,579).
+[241204 11:33:29] I:225:index_articles_by_date_range - 105/153: Indexed 268/268 articles for 14.04.2024 (n=31,847).
+[241204 11:33:30] I:225:index_articles_by_date_range - 106/153: Indexed 319/319 articles for 15.04.2024 (n=32,166).
+[241204 11:33:31] I:225:index_articles_by_date_range - 107/153: Indexed 348/348 articles for 16.04.2024 (n=32,514).
+[241204 11:33:31] I:225:index_articles_by_date_range - 108/153: Indexed 387/387 articles for 17.04.2024 (n=32,901).
+[241204 11:33:32] I:225:index_articles_by_date_range - 109/153: Indexed 376/376 articles for 18.04.2024 (n=33,277).
+[241204 11:33:33] I:225:index_articles_by_date_range - 110/153: Indexed 378/378 articles for 19.04.2024 (n=33,655).
+[241204 11:33:33] I:225:index_articles_by_date_range - 111/153: Indexed 258/258 articles for 20.04.2024 (n=33,913).
+[241204 11:33:33] I:225:index_articles_by_date_range - 112/153: Indexed 357/357 articles for 21.04.2024 (n=34,270).
+[241204 11:33:34] I:225:index_articles_by_date_range - 113/153: Indexed 372/372 articles for 22.04.2024 (n=34,642).
+[241204 11:33:36] I:225:index_articles_by_date_range - 114/153: Indexed 388/388 articles for 23.04.2024 (n=35,030).
+[241204 11:33:36] I:225:index_articles_by_date_range - 115/153: Indexed 310/310 articles for 24.04.2024 (n=35,340).
+[241204 11:33:37] I:225:index_articles_by_date_range - 116/153: Indexed 345/345 articles for 25.04.2024 (n=35,685).
+[241204 11:33:37] I:225:index_articles_by_date_range - 117/153: Indexed 356/356 articles for 26.04.2024 (n=36,041).
+[241204 11:33:38] I:225:index_articles_by_date_range - 118/153: Indexed 278/278 articles for 27.04.2024 (n=36,319).
+[241204 11:33:38] I:225:index_articles_by_date_range - 119/153: Indexed 275/275 articles for 28.04.2024 (n=36,594).
+[241204 11:33:39] I:225:index_articles_by_date_range - 120/153: Indexed 400/400 articles for 29.04.2024 (n=36,994).
+[241204 11:33:40] I:225:index_articles_by_date_range - 121/153: Indexed 320/320 articles for 30.04.2024 (n=37,314).
+[241204 11:33:40] I:225:index_articles_by_date_range - 122/153: Indexed 265/265 articles for 01.05.2024 (n=37,579).
+[241204 11:33:40] I:225:index_articles_by_date_range - 123/153: Indexed 277/277 articles for 02.05.2024 (n=37,856).
+[241204 11:33:41] I:225:index_articles_by_date_range - 124/153: Indexed 258/258 articles for 03.05.2024 (n=38,114).
+[241204 11:33:41] I:225:index_articles_by_date_range - 125/153: Indexed 313/313 articles for 04.05.2024 (n=38,427).
+[241204 11:33:42] I:225:index_articles_by_date_range - 126/153: Indexed 305/305 articles for 05.05.2024 (n=38,732).
+[241204 11:33:43] I:225:index_articles_by_date_range - 127/153: Indexed 377/377 articles for 06.05.2024 (n=39,109).
+[241204 11:33:43] I:225:index_articles_by_date_range - 128/153: Indexed 346/346 articles for 07.05.2024 (n=39,455).
+[241204 11:33:44] I:225:index_articles_by_date_range - 129/153: Indexed 343/343 articles for 08.05.2024 (n=39,798).
+[241204 11:33:44] I:225:index_articles_by_date_range - 130/153: Indexed 313/313 articles for 09.05.2024 (n=40,111).
+[241204 11:33:45] I:225:index_articles_by_date_range - 131/153: Indexed 332/332 articles for 10.05.2024 (n=40,443).
+[241204 11:33:46] I:225:index_articles_by_date_range - 132/153: Indexed 336/336 articles for 11.05.2024 (n=40,779).
+[241204 11:33:46] I:225:index_articles_by_date_range - 133/153: Indexed 300/300 articles for 12.05.2024 (n=41,079).
+[241204 11:33:47] I:225:index_articles_by_date_range - 134/153: Indexed 375/375 articles for 13.05.2024 (n=41,454).
+[241204 11:33:48] I:225:index_articles_by_date_range - 135/153: Indexed 370/370 articles for 14.05.2024 (n=41,824).
+[241204 11:33:48] I:225:index_articles_by_date_range - 136/153: Indexed 373/373 articles for 15.05.2024 (n=42,197).
+[241204 11:33:49] I:225:index_articles_by_date_range - 137/153: Indexed 400/400 articles for 16.05.2024 (n=42,597).
+[241204 11:33:49] I:225:index_articles_by_date_range - 138/153: Indexed 375/375 articles for 17.05.2024 (n=42,972).
+[241204 11:33:50] I:225:index_articles_by_date_range - 139/153: Indexed 294/294 articles for 18.05.2024 (n=43,266).
+[241204 11:33:51] I:225:index_articles_by_date_range - 140/153: Indexed 373/373 articles for 19.05.2024 (n=43,639).
+[241204 11:33:51] I:225:index_articles_by_date_range - 141/153: Indexed 290/290 articles for 20.05.2024 (n=43,929).
+[241204 11:33:52] I:225:index_articles_by_date_range - 142/153: Indexed 310/310 articles for 21.05.2024 (n=44,239).
+[241204 11:33:52] I:225:index_articles_by_date_range - 143/153: Indexed 346/346 articles for 22.05.2024 (n=44,585).
+[241204 11:33:53] I:225:index_articles_by_date_range - 144/153: Indexed 333/333 articles for 23.05.2024 (n=44,918).
+[241204 11:33:53] I:225:index_articles_by_date_range - 145/153: Indexed 318/318 articles for 24.05.2024 (n=45,236).
+[241204 11:33:54] I:225:index_articles_by_date_range - 146/153: Indexed 262/262 articles for 25.05.2024 (n=45,498).
+[241204 11:33:54] I:225:index_articles_by_date_range - 147/153: Indexed 298/298 articles for 26.05.2024 (n=45,796).
+[241204 11:33:55] I:225:index_articles_by_date_range - 148/153: Indexed 293/293 articles for 27.05.2024 (n=46,089).
+[241204 11:33:56] I:225:index_articles_by_date_range - 149/153: Indexed 379/379 articles for 28.05.2024 (n=46,468).
+[241204 11:33:56] I:225:index_articles_by_date_range - 150/153: Indexed 345/345 articles for 29.05.2024 (n=46,813).
+[241204 11:33:57] I:225:index_articles_by_date_range - 151/153: Indexed 317/317 articles for 30.05.2024 (n=47,130).
+[241204 11:33:58] I:225:index_articles_by_date_range - 152/153: Indexed 393/393 articles for 31.05.2024 (n=47,523).
+[241204 11:33:58] I:225:index_articles_by_date_range - 153/153: Indexed 264/264 articles for 01.06.2024 (n=47,787).
+[241204 11:33:58] I:331:scrape_public_articles - Start scraping 47,787 public articles.
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: MetaDescription
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: MetaLang
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: MetaKeywords
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: MetaFavicon
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: MetaCanonical
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: MetaEncoding
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: Image
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: Domain
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: Title
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: Text
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: OpengraphSiteName
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: OpengraphType
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: OpengraphTitle
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: OpengraphUrl
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: OpengraphDescription
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: OpengraphImage
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: Tags
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: Tweets
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: Movies
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: Links
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: Authors
+[241204 11:33:58] I:345:scrape_public_articles - New feature detected: PublishDate
+[241204 11:34:14] I:345:scrape_public_articles - New feature detected: OpengraphVideo
+[241204 15:08:20] WARNING:36:_wrapper - Exception while executing scrape_public_articles: TooManyRedirects.
+[241204 15:08:20] I:37:_wrapper - Retrying in 100 seconds...
+[241204 15:10:00] I:331:scrape_public_articles - Start scraping 6,725 public articles.
+[241204 15:10:02] WARNING:36:_wrapper - Exception while executing scrape_public_articles: TooManyRedirects.
+[241204 15:10:02] I:37:_wrapper - Retrying in 100 seconds...
+[241204 15:11:42] I:331:scrape_public_articles - Start scraping 6,725 public articles.
+[241204 15:11:43] WARNING:36:_wrapper - Exception while executing scrape_public_articles: TooManyRedirects.
+[241204 15:11:43] I:37:_wrapper - Retrying in 100 seconds...
+[241204 15:12:10] I:49:__init__ - Initializing de_bild scraper.
+[241204 15:12:10] I:49:__init__ - Initializing de_welt scraper.
