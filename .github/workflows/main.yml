@@ -46,7 +46,7 @@ jobs:
       # Step 5: Convert Notebook to HTML
       - name: Convert Notebook to HTML
         run: |
-          jupyter nbconvert DSProjekt_DT_WS24.ipynb --to html --output html/index.html
+          jupyter nbconvert notebooks/DSProjekt_DT_WS24.ipynb --to html --output html/index.html
 
       # Step 6: Commit HTML file to the repository
       - name: Commit changes
