@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "DSProjekt_DT_WS24.ipynb" # Trigger only when this file changes
+      - "notebooks/DSProjekt_DT_WS24.ipynb" # Trigger only when this file changes
   workflow_dispatch:
 
 permissions:
