@@ -1,0 +1,99 @@
+name: Convert and Commit Jupyter Notebooks to HTML various notebooks
+
+on:
+  workflow_dispatch: # Trigger only when manually initiated
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  convert_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install nbconvert jinja2
+
+      # Step 4: Ensure HTML directory exists
+      - name: Ensure html directory exists
+        run: mkdir -p html
+
+      # Step 5: Convert Notebooks to HTML
+      - name: Convert Notebooks to HTML
+        run: |
+          for notebook in notebooks/*.ipynb; do
+            base_name=$(basename "$notebook" .ipynb)
+            jupyter nbconvert "$notebook" --to html --output "html/$base_name.html"
+          done
+
+      # Step 6: Generate index.html with links to all notebooks
+      - name: Generate index.html
+        run: |
+          cat << 'EOF' > html/index.html
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Notebooks</title>
+          </head>
+          <body>
+              <h1>Available Notebooks</h1>
+              <ul>
+          EOF
+
+          for html_file in html/*.html; do
+            file_name=$(basename "$html_file")
+            if [ "$file_name" != "index.html" ]; then
+              echo "<li><a href='$file_name'>${file_name%.html}</a></li>" >> html/index.html
+            fi
+          done
+
+          echo "</ul></body></html>" >> html/index.html
+
+      # Step 7: Commit changes
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add html/
+            git commit -m "Create or update HTML versions of notebooks"
+            git push --force
+          else
+            echo "No changes to commit"
+          fi
+
+      # Step 8: Configure Pages environment
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # Step 9: Upload HTML directory for deployment
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'html'
+
+      # Step 10: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
