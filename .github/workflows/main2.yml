@@ -1,4 +1,4 @@
-name: Convert and Commit Jupyter Notebooks to HTML various notebooks
+name: Convert and Commit Jupyter Notebooks to HTML
 
 on:
   workflow_dispatch: # Trigger only when manually initiated
@@ -33,7 +33,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install nbconvert jinja2
 
-      # Step 4: Ensure HTML directory exists
+      # Step 4: Ensure the html directory exists
       - name: Ensure html directory exists
         run: mkdir -p html
 
