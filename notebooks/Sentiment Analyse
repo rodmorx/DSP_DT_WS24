@@ -1,0 +1,21 @@
+### New method Sentiment Analyse
+from transformers import pipeline
+
+# 1. Datei laden
+df = pd.read_csv(file_path)
+###df = df.head(100)  # Nur die ersten 100 Zeilen verwenden
+
+# 2. Sentiment-Analyzer laden
+sentiment_analyzer = pipeline("sentiment-analysis", model="oliverguhr/german-sentiment-bert")
+
+# 3. Sentiment-Analyse auf die Spalte 'article' anwenden
+df['sentiment'] = df['maintext'].apply(lambda x: sentiment_analyzer(x[:512])[0]['label'])
+
+# 4. Ergebnisse überprüfen
+print(df[['maintext', 'sentiment']].head())
+
+# 5. Datei mit Ergebnissen speichern
+df.to_csv("out_with_sentiment_2.csv", index=False)
+print("Datei wurde gespeichert als 'out_with_sentiment_2.csv'.")
+
+!cp out_with_sentiment_2.csv /content/drive/MyDrive/
