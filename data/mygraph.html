@@ -1,0 +1,1005 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/css/tom-select.min.css" integrity="sha512-43fHB3GLgZfz8QXl1RPQ8O66oIgv3po9cJ5erMt1c4QISq9dYb195T3vr5ImnJPXuVroKcGBPXBFKETW8jrPNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/js/tom-select.complete.js" integrity="sha512-jeF9CfnvzDiw9G9xiksVjxR2lib44Gnovvkv+3CgCG6NXCD4gqlA5nDAVW5WjpA+i+/zKsUWV5xNEbW1X/HH0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 1000px;
+                 height: 700px;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 1000px;
+                 height: 700px;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+                <div id="select-menu" class="card-header">
+                    <div class="row no-gutters">
+                        <div class="col-10 pb-2">
+                            <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="selectNode([value]);"
+                            id="select-node"
+                            placeholder="Select node..."
+                            >
+                                <option selected>Select a Node by ID</option>
+                                
+                                    <option value="Uelzen">Uelzen</option>
+                                
+                                    <option value="niedersächsischen">niedersächsischen</option>
+                                
+                                    <option value="Stadt">Stadt</option>
+                                
+                                    <option value="Oberhof">Oberhof</option>
+                                
+                                    <option value="Opfers">Opfers</option>
+                                
+                                    <option value="Miriam M.">Miriam M.</option>
+                                
+                                    <option value="Hannover">Hannover</option>
+                                
+                                    <option value="Schwerin">Schwerin</option>
+                                
+                                    <option value="Lüneburg">Lüneburg</option>
+                                
+                                    <option value="Hamburg">Hamburg</option>
+                                
+                                    <option value="Was diese Kinderseelen">Was diese Kinderseelen</option>
+                                
+                                    <option value="dänisches">dänisches</option>
+                                
+                                    <option value="Stephan Hensel">Stephan Hensel</option>
+                                
+                                    <option value="Christina Block">Christina Block</option>
+                                
+                                    <option value="Weihnachten">Weihnachten</option>
+                                
+                                    <option value="Heilbronn">Heilbronn</option>
+                                
+                                    <option value="Klinikgesellschaft">Klinikgesellschaft</option>
+                                
+                                    <option value="Unser Mitgefühl">Unser Mitgefühl</option>
+                                
+                                    <option value="Euro">Euro</option>
+                                
+                                    <option value="Gesamtschaden">Gesamtschaden</option>
+                                
+                                    <option value="Bundeswehr">Bundeswehr</option>
+                                
+                                    <option value="Sachsen-Anhalt">Sachsen-Anhalt</option>
+                                
+                                    <option value="Thüringen">Thüringen</option>
+                                
+                                    <option value="Südharz">Südharz</option>
+                                
+                                    <option value="Kyffhäuser">Kyffhäuser</option>
+                                
+                                    <option value="Atem">Atem</option>
+                                
+                                    <option value="Niedersachsen">Niedersachsen</option>
+                                
+                                    <option value="Hochwasser-Hotspot">Hochwasser-Hotspot</option>
+                                
+                                    <option value="Lilienthal">Lilienthal</option>
+                                
+                                    <option value="Tränen-Rede">Tränen-Rede</option>
+                                
+                                    <option value="Schäuble-Tochter Christine">Schäuble-Tochter Christine</option>
+                                
+                                    <option value="Hause">Hause</option>
+                                
+                                    <option value="Oberfranken">Oberfranken</option>
+                                
+                                    <option value="Oberpfalz">Oberpfalz</option>
+                                
+                                    <option value="Die Unwetterwarnung vor Dauerregen">Die Unwetterwarnung vor Dauerregen</option>
+                                
+                                    <option value="Hessen">Hessen</option>
+                                
+                                    <option value="Otzberg">Otzberg</option>
+                                
+                                    <option value="Witta Pohl">Witta Pohl</option>
+                                
+                                    <option value="Fulda">Fulda</option>
+                                
+                                    <option value="Schwalm-Eder-Kreis">Schwalm-Eder-Kreis</option>
+                                
+                                    <option value="Hohe Pegelstände">Hohe Pegelstände</option>
+                                
+                                    <option value="Lahn">Lahn</option>
+                                
+                                    <option value="Eder">Eder</option>
+                                
+                                    <option value="Kinzig">Kinzig</option>
+                                
+                                    <option value="Frankfurt-Osthafen">Frankfurt-Osthafen</option>
+                                
+                                    <option value="Klein-Krotzenburg">Klein-Krotzenburg</option>
+                                
+                                    <option value="Raunheim">Raunheim</option>
+                                
+                                    <option value="Aller">Aller</option>
+                                
+                                    <option value="Weser">Weser</option>
+                                
+                                    <option value="Leine">Leine</option>
+                                
+                                    <option value="Hunte">Hunte</option>
+                                
+                                    <option value="Hase">Hase</option>
+                                
+                                    <option value="Fuhse">Fuhse</option>
+                                
+                                    <option value="Schunter">Schunter</option>
+                                
+                                    <option value="Oker">Oker</option>
+                                
+                                    <option value="Rinteln">Rinteln</option>
+                                
+                                    <option value="Vlotho">Vlotho</option>
+                                
+                                    <option value="Hameln">Hameln</option>
+                                
+                                    <option value="Glan">Glan</option>
+                                
+                                    <option value="Westpfalz">Westpfalz</option>
+                                
+                                    <option value="Zehnjahreshoch">Zehnjahreshoch</option>
+                                
+                                    <option value="6-Meter-Marke">6-Meter-Marke</option>
+                                
+                                    <option value="Schönau">Schönau</option>
+                                
+                                    <option value="Experten-Schätzung">Experten-Schätzung</option>
+                                
+                                    <option value="Hochleistungspumpen">Hochleistungspumpen</option>
+                                
+                                    <option value="Zeit">Zeit</option>
+                                
+                                    <option value="Basketball-Bundesliga">Basketball-Bundesliga</option>
+                                
+                                    <option value="MLP Academics Heidelberg">MLP Academics Heidelberg</option>
+                                
+                                    <option value="Freitagabend-Spiel">Freitagabend-Spiel</option>
+                                
+                                    <option value="RASTA Vechta">RASTA Vechta</option>
+                                
+                                    <option value="Johann Grünloh">Johann Grünloh</option>
+                                
+                                    <option value="Vechtas">Vechtas</option>
+                                
+                                    <option value="Marius Graf zur Pause">Marius Graf zur Pause</option>
+                                
+                                    <option value="Dyn">Dyn</option>
+                                
+                                    <option value="Heidelberger">Heidelberger</option>
+                                
+                                    <option value="Tim Coleman">Tim Coleman</option>
+                                
+                                    <option value="Heidelberg">Heidelberg</option>
+                                
+                                    <option value="Vechta">Vechta</option>
+                                
+                                    <option value="Paul Zipser">Paul Zipser</option>
+                                
+                                    <option value="Vollgas">Vollgas</option>
+                                
+                                    <option value="Heidelberg-Coach">Heidelberg-Coach</option>
+                                
+                                    <option value="Joonas Iisalo">Joonas Iisalo</option>
+                                
+                                    <option value="Die Gastgeber">Die Gastgeber</option>
+                                
+                                    <option value="Norddeutschen">Norddeutschen</option>
+                                
+                                    <option value="Deutschland">Deutschland</option>
+                                
+                                    <option value="Unfassbare Wende">Unfassbare Wende</option>
+                                
+                                    <option value="Theodor">Theodor</option>
+                                
+                                    <option value="Silvesternacht">Silvesternacht</option>
+                                
+                                    <option value="Dänemark">Dänemark</option>
+                                
+                                    <option value="Kai Wantzen">Kai Wantzen</option>
+                                
+                                    <option value="Hamburger Oberlandesgerichtes">Hamburger Oberlandesgerichtes</option>
+                                
+                                    <option value="Vaters">Vaters</option>
+                                
+                                    <option value="Hanseatischen Oberlandesgerichts">Hanseatischen Oberlandesgerichts</option>
+                                
+                                    <option value="Gerhard Delling">Gerhard Delling</option>
+                                
+                                    <option value="BILD">BILD</option>
+                                
+                                    <option value="Hamburger Morgenpost">Hamburger Morgenpost</option>
+                                
+                                    <option value="Block-Villa">Block-Villa</option>
+                                
+                                    <option value="Klara">Klara</option>
+                                
+                                    <option value="dänischen">dänischen</option>
+                                
+                                    <option value="deutschen">deutschen</option>
+                                
+                                    <option value="Maaßen">Maaßen</option>
+                                
+                                    <option value="Maaßen-Partei">Maaßen-Partei</option>
+                                
+                                    <option value="Hermann Binkert">Hermann Binkert</option>
+                                
+                                    <option value="INSA">INSA</option>
+                                
+                                    <option value="Anthony Delon">Anthony Delon</option>
+                                
+                                    <option value="Offenburg">Offenburg</option>
+                                
+                                    <option value="Wolfgang Schäuble">Wolfgang Schäuble</option>
+                                
+                                    <option value="†81">†81</option>
+                                
+                                    <option value="Attentat">Attentat</option>
+                                
+                                    <option value="Gerd">Gerd</option>
+                                
+                                    <option value="Gengenbach">Gengenbach</option>
+                                
+                                    <option value="Kirche">Kirche</option>
+                                
+                                    <option value="Christine Strobl">Christine Strobl</option>
+                                
+                                    <option value="evangelischen">evangelischen</option>
+                                
+                                    <option value="Papilein">Papilein</option>
+                                
+                                    <option value="Strobl">Strobl</option>
+                                
+                                    <option value="Anna und Juliane">Anna und Juliane</option>
+                                
+                                    <option value="Bruder Hans-Jörg">Bruder Hans-Jörg</option>
+                                
+                                    <option value="Attentat stets unsere Urlaube">Attentat stets unsere Urlaube</option>
+                                
+                                    <option value="Nordsee">Nordsee</option>
+                                
+                                    <option value="Mick">Mick</option>
+                                
+                                    <option value="Kimi">Kimi</option>
+                                
+                                    <option value="Ava">Ava</option>
+                                
+                                    <option value="Emma">Emma</option>
+                                
+                                    <option value="Offenburger">Offenburger</option>
+                                
+                                    <option value="Dieses Jahr">Dieses Jahr</option>
+                                
+                                    <option value="Mama">Mama</option>
+                                
+                                    <option value="Sorgenrangliste">Sorgenrangliste</option>
+                                
+                                    <option value="Dollenberg">Dollenberg</option>
+                                
+                                    <option value="Schwarzwald">Schwarzwald</option>
+                                
+                                    <option value="Sorgenliste">Sorgenliste</option>
+                                
+                                    <option value="Uwe Martens">Uwe Martens</option>
+                                
+                                    <option value="Berlin">Berlin</option>
+                                
+                                    <option value="Bundestag">Bundestag</option>
+                                
+                                    <option value="CDU">CDU</option>
+                                
+                                    <option value="SPD">SPD</option>
+                                
+                                    <option value="Du">Du</option>
+                                
+                                    <option value="Liebe Nicole">Liebe Nicole</option>
+                                
+                                    <option value="Burkhard Rose">Burkhard Rose</option>
+                                
+                                    <option value="Holger Schrott">Holger Schrott</option>
+                                
+                                    <option value="Barbara Streck">Barbara Streck</option>
+                                
+                                    <option value="Mein Papa">Mein Papa</option>
+                                
+                                    <option value="Schlüter">Schlüter</option>
+                                
+                                    <option value="Frieder Merz">Frieder Merz</option>
+                                
+                                    <option value="Hans-Peter Repnik">Hans-Peter Repnik</option>
+                                
+                                    <option value="Nicole Gudehus">Nicole Gudehus</option>
+                                
+                                    <option value="Papas Engel">Papas Engel</option>
+                                
+                                    <option value="Du warst">Du warst</option>
+                                
+                                    <option value="Papas">Papas</option>
+                                
+                                    <option value="Mamas">Mamas</option>
+                                
+                                    <option value="Elke fühle">Elke fühle</option>
+                                
+                                    <option value="Nature Communications">Nature Communications</option>
+                                
+                                    <option value="Niederländische">Niederländische</option>
+                                
+                                    <option value="Brent Appelman">Brent Appelman</option>
+                                
+                                    <option value="Long-Covid-Patienten">Long-Covid-Patienten</option>
+                                
+                                    <option value="Zelluntergängen">Zelluntergängen</option>
+                                
+                                    <option value="Marc Wilmots">Marc Wilmots</option>
+                                
+                                    <option value="Portugal-Camp">Portugal-Camp</option>
+                                
+                                    <option value="Schalke-Boss!">Schalke-Boss!</option>
+                                
+                                    <option value="Wilmots">Wilmots</option>
+                                
+                                    <option value="Bundesliga">Bundesliga</option>
+                                
+                                    <option value="Knäbel-Nachfolger">Knäbel-Nachfolger</option>
+                                
+                                    <option value="André Hechelmann">André Hechelmann</option>
+                                
+                                    <option value="Belgien">Belgien</option>
+                                
+                                    <option value="Nuri T.">Nuri T.</option>
+                                
+                                    <option value="Gerald Asamoah">Gerald Asamoah</option>
+                                
+                                    <option value="Mike Büskens">Mike Büskens</option>
+                                
+                                    <option value="Tim Rehbein">Tim Rehbein</option>
+                                
+                                    <option value="Yusuf Kabadayi">Yusuf Kabadayi</option>
+                                
+                                    <option value="Königsblau-Kollegen">Königsblau-Kollegen</option>
+                                
+                                    <option value="Haan">Haan</option>
+                                
+                                    <option value="Säure-Anschlag">Säure-Anschlag</option>
+                                
+                                    <option value="Wuppertal">Wuppertal</option>
+                                
+                                    <option value="NRW">NRW</option>
+                                
+                                    <option value="Bernhard Günther">Bernhard Günther</option>
+                                
+                                    <option value="Maastricht">Maastricht</option>
+                                
+                                    <option value="Niederlande">Niederlande</option>
+                                
+                                    <option value="Marko L.">Marko L.</option>
+                                
+                                    <option value="Belastungszeuge Frank S.">Belastungszeuge Frank S.</option>
+                                
+                                    <option value="Serbe">Serbe</option>
+                                
+                                    <option value="Köln">Köln</option>
+                                
+                                    <option value="Ringer-Wettkampf">Ringer-Wettkampf</option>
+                                
+                                    <option value="Hells Angels">Hells Angels</option>
+                                
+                                    <option value="Säure-Attentat">Säure-Attentat</option>
+                                
+                                    <option value="Frank S.">Frank S.</option>
+                                
+                                    <option value="T.">T.</option>
+                                
+                                    <option value="Mario M.">Mario M.</option>
+                                
+                                    <option value="Rennrodelbahn Oberhof">Rennrodelbahn Oberhof</option>
+                                
+                                    <option value="Eiskanal">Eiskanal</option>
+                                
+                                    <option value="sozialen">sozialen</option>
+                                
+                                    <option value="Erfurter">Erfurter</option>
+                                
+                                    <option value="Juri Goldstein">Juri Goldstein</option>
+                                
+                                    <option value="Ice-Tubes">Ice-Tubes</option>
+                                
+                                    <option value="Rodelteam Suhl">Rodelteam Suhl</option>
+                                
+                                    <option value="Rutschring">Rutschring</option>
+                                
+                                    <option value="Vierer-Bob">Vierer-Bob</option>
+                                
+                                    <option value="Rodelbahn">Rodelbahn</option>
+                                
+                                    <option value="Der eiskalte Engel">Der eiskalte Engel</option>
+                                
+                                    <option value="Film-Legende Alain Delon">Film-Legende Alain Delon</option>
+                                
+                                    <option value="Sohn">Sohn</option>
+                                
+                                    <option value="französischen">französischen</option>
+                                
+                                    <option value="Paris Match">Paris Match</option>
+                                
+                                    <option value="Anouchka">Anouchka</option>
+                                
+                                    <option value="Schwester Anouchka">Schwester Anouchka</option>
+                                
+                                    <option value="Alain Delon">Alain Delon</option>
+                                
+                                    <option value="Sohnes">Sohnes</option>
+                                
+                                    <option value="Anthony">Anthony</option>
+                                
+                                    <option value="Der Sohn des Film-Stars">Der Sohn des Film-Stars</option>
+                                
+                                    <option value="Japanerin">Japanerin</option>
+                                
+                                    <option value="Hiromi Rollin">Hiromi Rollin</option>
+                                
+                                    <option value="Delons">Delons</option>
+                                
+                                    <option value="Rollin">Rollin</option>
+                                
+                                    <option value="Eurojackpot">Eurojackpot</option>
+                                
+                                    <option value="EUROJACKPOT-Zahlen">EUROJACKPOT-Zahlen</option>
+                                
+                                    <option value="Eurojackpot-Zahlen">Eurojackpot-Zahlen</option>
+                                
+                                    <option value="Finnland">Finnland</option>
+                                
+                                    <option value="Helsinki">Helsinki</option>
+                                
+                                    <option value="Gypsy-Rose Blanchard">Gypsy-Rose Blanchard</option>
+                                
+                                    <option value="Missouri">Missouri</option>
+                                
+                                    <option value="Gypsy-Rose">Gypsy-Rose</option>
+                                
+                                    <option value="Monster-Mutter">Monster-Mutter</option>
+                                
+                                    <option value="Märchen-Welten">Märchen-Welten</option>
+                                
+                                    <option value="Amazon">Amazon</option>
+                                
+                                    <option value="The Act">The Act</option>
+                                
+                                    <option value="Partei">Partei</option>
+                                
+                                    <option value="Verfassungsschutzchef">Verfassungsschutzchef</option>
+                                
+                                    <option value="WerteUnion">WerteUnion</option>
+                                
+                                    <option value="X">X</option>
+                                
+                                    <option value="Union">Union</option>
+                                
+                                    <option value="CDU/CSU">CDU/CSU</option>
+                                
+                                    <option value="AfD">AfD</option>
+                                
+                                    <option value="Wähler-Schnittmenge">Wähler-Schnittmenge</option>
+                                
+                                    <option value="AfD.">AfD.</option>
+                                
+                                    <option value="AfD-Wählern">AfD-Wählern</option>
+                                
+                                    <option value="Bundesamtes für Verfassungsschutz">Bundesamtes für Verfassungsschutz</option>
+                                
+                                    <option value="CSU">CSU</option>
+                                
+                                    <option value="Binkert">Binkert</option>
+                                
+                                    <option value="CDU-Bundestagsabgeordnete">CDU-Bundestagsabgeordnete</option>
+                                
+                                    <option value="Christian Natterer">Christian Natterer</option>
+                                
+                                    <option value="Twitter">Twitter</option>
+                                
+                                    <option value="BSW">BSW</option>
+                                
+                                    <option value="Bündnis Sahra Wagenknecht">Bündnis Sahra Wagenknecht</option>
+                                
+                                    <option value="Bundestagseinzug">Bundestagseinzug</option>
+                                
+                                    <option value="INSA-Analyse">INSA-Analyse</option>
+                                
+                                    <option value="CDU-Europa-Abgeordnete">CDU-Europa-Abgeordnete</option>
+                                
+                                    <option value="Dennis Radtke">Dennis Radtke</option>
+                                
+                                    <option value="Maaßen-Ankündigung">Maaßen-Ankündigung</option>
+                                
+                                    <option value="Südhessen">Südhessen</option>
+                                
+                                    <option value="Darmstadt">Darmstadt</option>
+                                
+                                    <option value="Familie Drombusch">Familie Drombusch</option>
+                                
+                                    <option value="ZDF">ZDF</option>
+                                
+                                    <option value="Pohl">Pohl</option>
+                                
+                                    <option value="Vera Drombusch">Vera Drombusch</option>
+                                
+                                    <option value="Bundenmühle">Bundenmühle</option>
+                                
+                                    <option value="Odenwald-Ortes">Odenwald-Ortes</option>
+                                
+                                    <option value="Günther Strack">Günther Strack</option>
+                                
+                                    <option value="Onkel Ludwig">Onkel Ludwig</option>
+                                
+                                    <option value="Alte Mühle">Alte Mühle</option>
+                                
+                                    <option value="Pappmaché-Kulissen">Pappmaché-Kulissen</option>
+                                
+                                    <option value="Sandstein-Fachwerk-Bau">Sandstein-Fachwerk-Bau</option>
+                                
+                                    <option value="Alten Mühle">Alten Mühle</option>
+                                
+                                    <option value="Zustandes Lebensgefahr!">Zustandes Lebensgefahr!</option>
+                                
+                                    <option value="Groß-Gerau">Groß-Gerau</option>
+                                
+                                    <option value="THW">THW</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2 pb-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+                  new TomSelect("#select-node",{
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      }
+                  });
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "font": {"color": "white"}, "id": "Uelzen", "label": "Uelzen", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "nieders\u00e4chsischen", "label": "nieders\u00e4chsischen", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Stadt", "label": "Stadt", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Oberhof", "label": "Oberhof", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Opfers", "label": "Opfers", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Miriam M.", "label": "Miriam M.", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hannover", "label": "Hannover", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Schwerin", "label": "Schwerin", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "L\u00fcneburg", "label": "L\u00fcneburg", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hamburg", "label": "Hamburg", "shape": "dot", "size": 9}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Was diese Kinderseelen", "label": "Was diese Kinderseelen", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "d\u00e4nisches", "label": "d\u00e4nisches", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Stephan Hensel", "label": "Stephan Hensel", "shape": "dot", "size": 7}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Christina Block", "label": "Christina Block", "shape": "dot", "size": 9}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Weihnachten", "label": "Weihnachten", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Heilbronn", "label": "Heilbronn", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Klinikgesellschaft", "label": "Klinikgesellschaft", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Unser Mitgef\u00fchl", "label": "Unser Mitgef\u00fchl", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Euro", "label": "Euro", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Gesamtschaden", "label": "Gesamtschaden", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Bundeswehr", "label": "Bundeswehr", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Sachsen-Anhalt", "label": "Sachsen-Anhalt", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Th\u00fcringen", "label": "Th\u00fcringen", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "S\u00fcdharz", "label": "S\u00fcdharz", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Kyffh\u00e4user", "label": "Kyffh\u00e4user", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Atem", "label": "Atem", "shape": "dot", "size": 12}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Niedersachsen", "label": "Niedersachsen", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hochwasser-Hotspot", "label": "Hochwasser-Hotspot", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Lilienthal", "label": "Lilienthal", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Tr\u00e4nen-Rede", "label": "Tr\u00e4nen-Rede", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Sch\u00e4uble-Tochter Christine", "label": "Sch\u00e4uble-Tochter Christine", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hause", "label": "Hause", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Oberfranken", "label": "Oberfranken", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Oberpfalz", "label": "Oberpfalz", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Die Unwetterwarnung vor Dauerregen", "label": "Die Unwetterwarnung vor Dauerregen", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hessen", "label": "Hessen", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Otzberg", "label": "Otzberg", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Witta Pohl", "label": "Witta Pohl", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Fulda", "label": "Fulda", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Schwalm-Eder-Kreis", "label": "Schwalm-Eder-Kreis", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hohe Pegelst\u00e4nde", "label": "Hohe Pegelst\u00e4nde", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Lahn", "label": "Lahn", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Eder", "label": "Eder", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Kinzig", "label": "Kinzig", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Frankfurt-Osthafen", "label": "Frankfurt-Osthafen", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Klein-Krotzenburg", "label": "Klein-Krotzenburg", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Raunheim", "label": "Raunheim", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Aller", "label": "Aller", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Weser", "label": "Weser", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Leine", "label": "Leine", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hunte", "label": "Hunte", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hase", "label": "Hase", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Fuhse", "label": "Fuhse", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Schunter", "label": "Schunter", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Oker", "label": "Oker", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Rinteln", "label": "Rinteln", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Vlotho", "label": "Vlotho", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hameln", "label": "Hameln", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Glan", "label": "Glan", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Westpfalz", "label": "Westpfalz", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Zehnjahreshoch", "label": "Zehnjahreshoch", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "6-Meter-Marke", "label": "6-Meter-Marke", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Sch\u00f6nau", "label": "Sch\u00f6nau", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Experten-Sch\u00e4tzung", "label": "Experten-Sch\u00e4tzung", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hochleistungspumpen", "label": "Hochleistungspumpen", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Zeit", "label": "Zeit", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Basketball-Bundesliga", "label": "Basketball-Bundesliga", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "MLP Academics Heidelberg", "label": "MLP Academics Heidelberg", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Freitagabend-Spiel", "label": "Freitagabend-Spiel", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "RASTA Vechta", "label": "RASTA Vechta", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Johann Gr\u00fcnloh", "label": "Johann Gr\u00fcnloh", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Vechtas", "label": "Vechtas", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Marius Graf zur Pause", "label": "Marius Graf zur Pause", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Dyn", "label": "Dyn", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Heidelberger", "label": "Heidelberger", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Tim Coleman", "label": "Tim Coleman", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Heidelberg", "label": "Heidelberg", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Vechta", "label": "Vechta", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Paul Zipser", "label": "Paul Zipser", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Vollgas", "label": "Vollgas", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Heidelberg-Coach", "label": "Heidelberg-Coach", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Joonas Iisalo", "label": "Joonas Iisalo", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Die Gastgeber", "label": "Die Gastgeber", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Norddeutschen", "label": "Norddeutschen", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Deutschland", "label": "Deutschland", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Unfassbare Wende", "label": "Unfassbare Wende", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Theodor", "label": "Theodor", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Silvesternacht", "label": "Silvesternacht", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "D\u00e4nemark", "label": "D\u00e4nemark", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Kai Wantzen", "label": "Kai Wantzen", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hamburger Oberlandesgerichtes", "label": "Hamburger Oberlandesgerichtes", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Vaters", "label": "Vaters", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hanseatischen Oberlandesgerichts", "label": "Hanseatischen Oberlandesgerichts", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Gerhard Delling", "label": "Gerhard Delling", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "BILD", "label": "BILD", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hamburger Morgenpost", "label": "Hamburger Morgenpost", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Block-Villa", "label": "Block-Villa", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Klara", "label": "Klara", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "d\u00e4nischen", "label": "d\u00e4nischen", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "deutschen", "label": "deutschen", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Maa\u00dfen", "label": "Maa\u00dfen", "shape": "dot", "size": 11}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Maa\u00dfen-Partei", "label": "Maa\u00dfen-Partei", "shape": "dot", "size": 19}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hermann Binkert", "label": "Hermann Binkert", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "INSA", "label": "INSA", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Anthony Delon", "label": "Anthony Delon", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Offenburg", "label": "Offenburg", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Wolfgang Sch\u00e4uble", "label": "Wolfgang Sch\u00e4uble", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "\u202081", "label": "\u202081", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Attentat", "label": "Attentat", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Gerd", "label": "Gerd", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Gengenbach", "label": "Gengenbach", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Kirche", "label": "Kirche", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Christine Strobl", "label": "Christine Strobl", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "evangelischen", "label": "evangelischen", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Papilein", "label": "Papilein", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Strobl", "label": "Strobl", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Anna und Juliane", "label": "Anna und Juliane", "shape": "dot", "size": 7}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Bruder Hans-J\u00f6rg", "label": "Bruder Hans-J\u00f6rg", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Attentat stets unsere Urlaube", "label": "Attentat stets unsere Urlaube", "shape": "dot", "size": 7}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Nordsee", "label": "Nordsee", "shape": "dot", "size": 7}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Mick", "label": "Mick", "shape": "dot", "size": 7}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Kimi", "label": "Kimi", "shape": "dot", "size": 7}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Ava", "label": "Ava", "shape": "dot", "size": 7}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Emma", "label": "Emma", "shape": "dot", "size": 7}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Offenburger", "label": "Offenburger", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Dieses Jahr", "label": "Dieses Jahr", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Mama", "label": "Mama", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Sorgenrangliste", "label": "Sorgenrangliste", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Dollenberg", "label": "Dollenberg", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Schwarzwald", "label": "Schwarzwald", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Sorgenliste", "label": "Sorgenliste", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Uwe Martens", "label": "Uwe Martens", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Berlin", "label": "Berlin", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Bundestag", "label": "Bundestag", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "CDU", "label": "CDU", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "SPD", "label": "SPD", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Du", "label": "Du", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Liebe Nicole", "label": "Liebe Nicole", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Burkhard Rose", "label": "Burkhard Rose", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Holger Schrott", "label": "Holger Schrott", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Barbara Streck", "label": "Barbara Streck", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Mein Papa", "label": "Mein Papa", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Schl\u00fcter", "label": "Schl\u00fcter", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Frieder Merz", "label": "Frieder Merz", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hans-Peter Repnik", "label": "Hans-Peter Repnik", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Nicole Gudehus", "label": "Nicole Gudehus", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Papas Engel", "label": "Papas Engel", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Du warst", "label": "Du warst", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Papas", "label": "Papas", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Mamas", "label": "Mamas", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Elke f\u00fchle", "label": "Elke f\u00fchle", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Nature Communications", "label": "Nature Communications", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Niederl\u00e4ndische", "label": "Niederl\u00e4ndische", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Brent Appelman", "label": "Brent Appelman", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Long-Covid-Patienten", "label": "Long-Covid-Patienten", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Zellunterg\u00e4ngen", "label": "Zellunterg\u00e4ngen", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Marc Wilmots", "label": "Marc Wilmots", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Portugal-Camp", "label": "Portugal-Camp", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Schalke-Boss!", "label": "Schalke-Boss!", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Wilmots", "label": "Wilmots", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Bundesliga", "label": "Bundesliga", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Kn\u00e4bel-Nachfolger", "label": "Kn\u00e4bel-Nachfolger", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Andr\u00e9 Hechelmann", "label": "Andr\u00e9 Hechelmann", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Belgien", "label": "Belgien", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Nuri T.", "label": "Nuri T.", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Gerald Asamoah", "label": "Gerald Asamoah", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Mike B\u00fcskens", "label": "Mike B\u00fcskens", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Tim Rehbein", "label": "Tim Rehbein", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Yusuf Kabadayi", "label": "Yusuf Kabadayi", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "K\u00f6nigsblau-Kollegen", "label": "K\u00f6nigsblau-Kollegen", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Haan", "label": "Haan", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "S\u00e4ure-Anschlag", "label": "S\u00e4ure-Anschlag", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Wuppertal", "label": "Wuppertal", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "NRW", "label": "NRW", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Bernhard G\u00fcnther", "label": "Bernhard G\u00fcnther", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Maastricht", "label": "Maastricht", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Niederlande", "label": "Niederlande", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Marko L.", "label": "Marko L.", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Belastungszeuge Frank S.", "label": "Belastungszeuge Frank S.", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Serbe", "label": "Serbe", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "K\u00f6ln", "label": "K\u00f6ln", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Ringer-Wettkampf", "label": "Ringer-Wettkampf", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hells Angels", "label": "Hells Angels", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "S\u00e4ure-Attentat", "label": "S\u00e4ure-Attentat", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Frank S.", "label": "Frank S.", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "T.", "label": "T.", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Mario M.", "label": "Mario M.", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Rennrodelbahn Oberhof", "label": "Rennrodelbahn Oberhof", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Eiskanal", "label": "Eiskanal", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "sozialen", "label": "sozialen", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Erfurter", "label": "Erfurter", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Juri Goldstein", "label": "Juri Goldstein", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Ice-Tubes", "label": "Ice-Tubes", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Rodelteam Suhl", "label": "Rodelteam Suhl", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Rutschring", "label": "Rutschring", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Vierer-Bob", "label": "Vierer-Bob", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Rodelbahn", "label": "Rodelbahn", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Der eiskalte Engel", "label": "Der eiskalte Engel", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Film-Legende Alain Delon", "label": "Film-Legende Alain Delon", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Sohn", "label": "Sohn", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "franz\u00f6sischen", "label": "franz\u00f6sischen", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Paris Match", "label": "Paris Match", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Anouchka", "label": "Anouchka", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Schwester Anouchka", "label": "Schwester Anouchka", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Alain Delon", "label": "Alain Delon", "shape": "dot", "size": 7}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Sohnes", "label": "Sohnes", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Anthony", "label": "Anthony", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Der Sohn des Film-Stars", "label": "Der Sohn des Film-Stars", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Japanerin", "label": "Japanerin", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hiromi Rollin", "label": "Hiromi Rollin", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Delons", "label": "Delons", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Rollin", "label": "Rollin", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Eurojackpot", "label": "Eurojackpot", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "EUROJACKPOT-Zahlen", "label": "EUROJACKPOT-Zahlen", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Eurojackpot-Zahlen", "label": "Eurojackpot-Zahlen", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Finnland", "label": "Finnland", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Helsinki", "label": "Helsinki", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Gypsy-Rose Blanchard", "label": "Gypsy-Rose Blanchard", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Missouri", "label": "Missouri", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Gypsy-Rose", "label": "Gypsy-Rose", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Monster-Mutter", "label": "Monster-Mutter", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "M\u00e4rchen-Welten", "label": "M\u00e4rchen-Welten", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Amazon", "label": "Amazon", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "The Act", "label": "The Act", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Partei", "label": "Partei", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Verfassungsschutzchef", "label": "Verfassungsschutzchef", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "WerteUnion", "label": "WerteUnion", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "X", "label": "X", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Union", "label": "Union", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "CDU/CSU", "label": "CDU/CSU", "shape": "dot", "size": 12}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "AfD", "label": "AfD", "shape": "dot", "size": 14}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "W\u00e4hler-Schnittmenge", "label": "W\u00e4hler-Schnittmenge", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "AfD.", "label": "AfD.", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "AfD-W\u00e4hlern", "label": "AfD-W\u00e4hlern", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Bundesamtes f\u00fcr Verfassungsschutz", "label": "Bundesamtes f\u00fcr Verfassungsschutz", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "CSU", "label": "CSU", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Binkert", "label": "Binkert", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "CDU-Bundestagsabgeordnete", "label": "CDU-Bundestagsabgeordnete", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Christian Natterer", "label": "Christian Natterer", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Twitter", "label": "Twitter", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "BSW", "label": "BSW", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "B\u00fcndnis Sahra Wagenknecht", "label": "B\u00fcndnis Sahra Wagenknecht", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Bundestagseinzug", "label": "Bundestagseinzug", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "INSA-Analyse", "label": "INSA-Analyse", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "CDU-Europa-Abgeordnete", "label": "CDU-Europa-Abgeordnete", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Dennis Radtke", "label": "Dennis Radtke", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Maa\u00dfen-Ank\u00fcndigung", "label": "Maa\u00dfen-Ank\u00fcndigung", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "S\u00fcdhessen", "label": "S\u00fcdhessen", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Darmstadt", "label": "Darmstadt", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Familie Drombusch", "label": "Familie Drombusch", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "ZDF", "label": "ZDF", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Pohl", "label": "Pohl", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Vera Drombusch", "label": "Vera Drombusch", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Bundenm\u00fchle", "label": "Bundenm\u00fchle", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Odenwald-Ortes", "label": "Odenwald-Ortes", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "G\u00fcnther Strack", "label": "G\u00fcnther Strack", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Onkel Ludwig", "label": "Onkel Ludwig", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Alte M\u00fchle", "label": "Alte M\u00fchle", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Pappmach\u00e9-Kulissen", "label": "Pappmach\u00e9-Kulissen", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Sandstein-Fachwerk-Bau", "label": "Sandstein-Fachwerk-Bau", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Alten M\u00fchle", "label": "Alten M\u00fchle", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Zustandes Lebensgefahr!", "label": "Zustandes Lebensgefahr!", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Gro\u00df-Gerau", "label": "Gro\u00df-Gerau", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "THW", "label": "THW", "shape": "dot", "size": 1}]);
+                  edges = new vis.DataSet([{"from": "Uelzen", "to": "nieders\u00e4chsischen", "value": 2, "width": 1}, {"from": "Uelzen", "to": "Stadt", "value": 2, "width": 1}, {"from": "Uelzen", "to": "Uelzen", "value": 1, "width": 1}, {"from": "nieders\u00e4chsischen", "to": "Stadt", "value": 1, "width": 1}, {"from": "Stadt", "to": "Oberhof", "value": 1, "width": 1}, {"from": "Stadt", "to": "Opfers", "value": 1, "width": 1}, {"from": "Stadt", "to": "Miriam M.", "value": 1, "width": 1}, {"from": "Hannover", "to": "Schwerin", "value": 1, "width": 1}, {"from": "Hannover", "to": "L\u00fcneburg", "value": 1, "width": 1}, {"from": "Hannover", "to": "Hamburg", "value": 1, "width": 1}, {"from": "Schwerin", "to": "L\u00fcneburg", "value": 1, "width": 1}, {"from": "Schwerin", "to": "Hamburg", "value": 1, "width": 1}, {"from": "L\u00fcneburg", "to": "Hamburg", "value": 1, "width": 1}, {"from": "Hamburg", "to": "Was diese Kinderseelen", "value": 1, "width": 1}, {"from": "Hamburg", "to": "d\u00e4nisches", "value": 1, "width": 1}, {"from": "Hamburg", "to": "Stephan Hensel", "value": 1, "width": 1}, {"from": "Hamburg", "to": "Christina Block", "value": 1, "width": 1}, {"from": "Hamburg", "to": "Weihnachten", "value": 1, "width": 1}, {"from": "Hamburg", "to": "Heilbronn", "value": 1, "width": 1}, {"from": "Klinikgesellschaft", "to": "Unser Mitgef\u00fchl", "value": 1, "width": 1}, {"from": "Euro", "to": "Gesamtschaden", "value": 1, "width": 1}, {"from": "Bundeswehr", "to": "Sachsen-Anhalt", "value": 1, "width": 1}, {"from": "Sachsen-Anhalt", "to": "Th\u00fcringen", "value": 2, "width": 1}, {"from": "Sachsen-Anhalt", "to": "S\u00fcdharz", "value": 1, "width": 1}, {"from": "Sachsen-Anhalt", "to": "Kyffh\u00e4user", "value": 1, "width": 1}, {"from": "Sachsen-Anhalt", "to": "Atem", "value": 1, "width": 1}, {"from": "Niedersachsen", "to": "Weihnachten", "value": 1, "width": 1}, {"from": "Niedersachsen", "to": "Niedersachsen", "value": 1, "width": 1}, {"from": "Niedersachsen", "to": "Hochwasser-Hotspot", "value": 2, "width": 1}, {"from": "Niedersachsen", "to": "Lilienthal", "value": 1, "width": 1}, {"from": "Weihnachten", "to": "Tr\u00e4nen-Rede", "value": 1, "width": 1}, {"from": "Weihnachten", "to": "Sch\u00e4uble-Tochter Christine", "value": 1, "width": 1}, {"from": "Weihnachten", "to": "Heilbronn", "value": 1, "width": 1}, {"from": "Weihnachten", "to": "Hause", "value": 1, "width": 1}, {"from": "Oberfranken", "to": "Oberpfalz", "value": 1, "width": 1}, {"from": "Die Unwetterwarnung vor Dauerregen", "to": "Hessen", "value": 2, "width": 1}, {"from": "Hessen", "to": "Hessen", "value": 1, "width": 1}, {"from": "Hessen", "to": "Otzberg", "value": 1, "width": 1}, {"from": "Hessen", "to": "Witta Pohl", "value": 1, "width": 1}, {"from": "Fulda", "to": "Schwalm-Eder-Kreis", "value": 1, "width": 1}, {"from": "Hohe Pegelst\u00e4nde", "to": "Lahn", "value": 1, "width": 1}, {"from": "Hohe Pegelst\u00e4nde", "to": "Eder", "value": 1, "width": 1}, {"from": "Hohe Pegelst\u00e4nde", "to": "Kinzig", "value": 1, "width": 1}, {"from": "Lahn", "to": "Eder", "value": 1, "width": 1}, {"from": "Lahn", "to": "Kinzig", "value": 1, "width": 1}, {"from": "Eder", "to": "Kinzig", "value": 1, "width": 1}, {"from": "Frankfurt-Osthafen", "to": "Klein-Krotzenburg", "value": 1, "width": 1}, {"from": "Frankfurt-Osthafen", "to": "Raunheim", "value": 1, "width": 1}, {"from": "Klein-Krotzenburg", "to": "Raunheim", "value": 1, "width": 1}, {"from": "Aller", "to": "Weser", "value": 1, "width": 1}, {"from": "Aller", "to": "Leine", "value": 1, "width": 1}, {"from": "Aller", "to": "Hunte", "value": 1, "width": 1}, {"from": "Aller", "to": "Hase", "value": 1, "width": 1}, {"from": "Aller", "to": "Fuhse", "value": 1, "width": 1}, {"from": "Aller", "to": "Schunter", "value": 1, "width": 1}, {"from": "Aller", "to": "Oker", "value": 1, "width": 1}, {"from": "Aller", "to": "Atem", "value": 1, "width": 1}, {"from": "Weser", "to": "Leine", "value": 1, "width": 1}, {"from": "Weser", "to": "Hunte", "value": 1, "width": 1}, {"from": "Weser", "to": "Hase", "value": 1, "width": 1}, {"from": "Weser", "to": "Fuhse", "value": 1, "width": 1}, {"from": "Weser", "to": "Schunter", "value": 1, "width": 1}, {"from": "Weser", "to": "Oker", "value": 1, "width": 1}, {"from": "Weser", "to": "Atem", "value": 1, "width": 1}, {"from": "Leine", "to": "Hunte", "value": 1, "width": 1}, {"from": "Leine", "to": "Hase", "value": 1, "width": 1}, {"from": "Leine", "to": "Fuhse", "value": 1, "width": 1}, {"from": "Leine", "to": "Schunter", "value": 1, "width": 1}, {"from": "Leine", "to": "Oker", "value": 1, "width": 1}, {"from": "Leine", "to": "Atem", "value": 1, "width": 1}, {"from": "Hunte", "to": "Hase", "value": 1, "width": 1}, {"from": "Hunte", "to": "Fuhse", "value": 1, "width": 1}, {"from": "Hunte", "to": "Schunter", "value": 1, "width": 1}, {"from": "Hunte", "to": "Oker", "value": 1, "width": 1}, {"from": "Hunte", "to": "Atem", "value": 1, "width": 1}, {"from": "Hase", "to": "Fuhse", "value": 1, "width": 1}, {"from": "Hase", "to": "Schunter", "value": 1, "width": 1}, {"from": "Hase", "to": "Oker", "value": 1, "width": 1}, {"from": "Hase", "to": "Atem", "value": 1, "width": 1}, {"from": "Fuhse", "to": "Schunter", "value": 1, "width": 1}, {"from": "Fuhse", "to": "Oker", "value": 1, "width": 1}, {"from": "Fuhse", "to": "Atem", "value": 1, "width": 1}, {"from": "Schunter", "to": "Oker", "value": 1, "width": 1}, {"from": "Schunter", "to": "Atem", "value": 1, "width": 1}, {"from": "Oker", "to": "Atem", "value": 1, "width": 1}, {"from": "Atem", "to": "S\u00fcdharz", "value": 1, "width": 1}, {"from": "Atem", "to": "Kyffh\u00e4user", "value": 1, "width": 1}, {"from": "Atem", "to": "Th\u00fcringen", "value": 1, "width": 1}, {"from": "Rinteln", "to": "Vlotho", "value": 1, "width": 1}, {"from": "Rinteln", "to": "Hameln", "value": 1, "width": 1}, {"from": "Vlotho", "to": "Hameln", "value": 1, "width": 1}, {"from": "Glan", "to": "Westpfalz", "value": 1, "width": 1}, {"from": "Glan", "to": "Zehnjahreshoch", "value": 1, "width": 1}, {"from": "Westpfalz", "to": "Zehnjahreshoch", "value": 1, "width": 1}, {"from": "6-Meter-Marke", "to": "Sch\u00f6nau", "value": 1, "width": 1}, {"from": "6-Meter-Marke", "to": "Experten-Sch\u00e4tzung", "value": 1, "width": 1}, {"from": "Th\u00fcringen", "to": "S\u00fcdharz", "value": 1, "width": 1}, {"from": "Th\u00fcringen", "to": "Kyffh\u00e4user", "value": 1, "width": 1}, {"from": "Kyffh\u00e4user", "to": "S\u00fcdharz", "value": 1, "width": 1}, {"from": "Hochleistungspumpen", "to": "Zeit", "value": 1, "width": 1}, {"from": "Basketball-Bundesliga", "to": "MLP Academics Heidelberg", "value": 1, "width": 1}, {"from": "Freitagabend-Spiel", "to": "RASTA Vechta", "value": 1, "width": 1}, {"from": "Johann Gr\u00fcnloh", "to": "Vechtas", "value": 1, "width": 1}, {"from": "Vechtas", "to": "Marius Graf zur Pause", "value": 1, "width": 1}, {"from": "Vechtas", "to": "Dyn", "value": 1, "width": 1}, {"from": "Heidelberger", "to": "Tim Coleman", "value": 1, "width": 1}, {"from": "Heidelberg", "to": "Vechta", "value": 5, "width": 1}, {"from": "Heidelberg", "to": "Heidelberg", "value": 1, "width": 1}, {"from": "Heidelberg", "to": "Paul Zipser", "value": 1, "width": 1}, {"from": "Vechta", "to": "Vechta", "value": 1, "width": 1}, {"from": "Vechta", "to": "Vollgas", "value": 1, "width": 1}, {"from": "Vechta", "to": "Heidelberg-Coach", "value": 1, "width": 1}, {"from": "Vechta", "to": "Joonas Iisalo", "value": 1, "width": 1}, {"from": "Die Gastgeber", "to": "Norddeutschen", "value": 1, "width": 1}, {"from": "Marius Graf zur Pause", "to": "Dyn", "value": 1, "width": 1}, {"from": "Vollgas", "to": "Heidelberg-Coach", "value": 1, "width": 1}, {"from": "Vollgas", "to": "Joonas Iisalo", "value": 1, "width": 1}, {"from": "Heidelberg-Coach", "to": "Joonas Iisalo", "value": 1, "width": 1}, {"from": "Deutschland", "to": "Unfassbare Wende", "value": 1, "width": 1}, {"from": "Deutschland", "to": "Christina Block", "value": 1, "width": 1}, {"from": "Deutschland", "to": "Theodor", "value": 1, "width": 1}, {"from": "Deutschland", "to": "Silvesternacht", "value": 1, "width": 1}, {"from": "Deutschland", "to": "Stephan Hensel", "value": 1, "width": 1}, {"from": "Deutschland", "to": "D\u00e4nemark", "value": 1, "width": 1}, {"from": "Deutschland", "to": "Kai Wantzen", "value": 1, "width": 1}, {"from": "Deutschland", "to": "Hamburger Oberlandesgerichtes", "value": 1, "width": 1}, {"from": "Deutschland", "to": "Vaters", "value": 1, "width": 1}, {"from": "Deutschland", "to": "Hanseatischen Oberlandesgerichts", "value": 1, "width": 1}, {"from": "Unfassbare Wende", "to": "Christina Block", "value": 1, "width": 1}, {"from": "Christina Block", "to": "Gerhard Delling", "value": 1, "width": 1}, {"from": "Christina Block", "to": "BILD", "value": 2, "width": 1}, {"from": "Christina Block", "to": "d\u00e4nisches", "value": 1, "width": 1}, {"from": "Christina Block", "to": "Stephan Hensel", "value": 1, "width": 1}, {"from": "Christina Block", "to": "Hamburger Morgenpost", "value": 1, "width": 1}, {"from": "Christina Block", "to": "D\u00e4nemark", "value": 1, "width": 1}, {"from": "Silvesternacht", "to": "Theodor", "value": 1, "width": 1}, {"from": "Silvesternacht", "to": "Stephan Hensel", "value": 1, "width": 1}, {"from": "Silvesternacht", "to": "D\u00e4nemark", "value": 1, "width": 1}, {"from": "Theodor", "to": "Stephan Hensel", "value": 1, "width": 1}, {"from": "Theodor", "to": "D\u00e4nemark", "value": 1, "width": 1}, {"from": "Theodor", "to": "Block-Villa", "value": 1, "width": 1}, {"from": "Theodor", "to": "Klara", "value": 1, "width": 1}, {"from": "Stephan Hensel", "to": "D\u00e4nemark", "value": 1, "width": 1}, {"from": "Stephan Hensel", "to": "d\u00e4nisches", "value": 1, "width": 1}, {"from": "D\u00e4nemark", "to": "Hamburger Morgenpost", "value": 1, "width": 1}, {"from": "Gerhard Delling", "to": "BILD", "value": 1, "width": 1}, {"from": "BILD", "to": "d\u00e4nischen", "value": 1, "width": 1}, {"from": "BILD", "to": "deutschen", "value": 1, "width": 1}, {"from": "BILD", "to": "Maa\u00dfen", "value": 1, "width": 1}, {"from": "BILD", "to": "Maa\u00dfen-Partei", "value": 1, "width": 1}, {"from": "BILD", "to": "Hermann Binkert", "value": 1, "width": 1}, {"from": "BILD", "to": "INSA", "value": 1, "width": 1}, {"from": "Block-Villa", "to": "Klara", "value": 1, "width": 1}, {"from": "deutschen", "to": "d\u00e4nischen", "value": 1, "width": 1}, {"from": "Hamburger Oberlandesgerichtes", "to": "Kai Wantzen", "value": 1, "width": 1}, {"from": "Hamburger Oberlandesgerichtes", "to": "Vaters", "value": 1, "width": 1}, {"from": "Hamburger Oberlandesgerichtes", "to": "Hanseatischen Oberlandesgerichts", "value": 1, "width": 1}, {"from": "Kai Wantzen", "to": "Vaters", "value": 1, "width": 1}, {"from": "Kai Wantzen", "to": "Hanseatischen Oberlandesgerichts", "value": 1, "width": 1}, {"from": "Vaters", "to": "Hanseatischen Oberlandesgerichts", "value": 1, "width": 1}, {"from": "Vaters", "to": "Anthony Delon", "value": 1, "width": 1}, {"from": "Offenburg", "to": "Wolfgang Sch\u00e4uble", "value": 1, "width": 1}, {"from": "Offenburg", "to": "\u202081", "value": 1, "width": 1}, {"from": "Offenburg", "to": "Attentat", "value": 1, "width": 1}, {"from": "Offenburg", "to": "Gerd", "value": 1, "width": 1}, {"from": "Offenburg", "to": "Gengenbach", "value": 1, "width": 1}, {"from": "Wolfgang Sch\u00e4uble", "to": "\u202081", "value": 1, "width": 1}, {"from": "Wolfgang Sch\u00e4uble", "to": "Kirche", "value": 1, "width": 1}, {"from": "Christine Strobl", "to": "evangelischen", "value": 1, "width": 1}, {"from": "Papilein", "to": "Strobl", "value": 1, "width": 1}, {"from": "Sch\u00e4uble-Tochter Christine", "to": "Tr\u00e4nen-Rede", "value": 1, "width": 1}, {"from": "Anna und Juliane", "to": "Bruder Hans-J\u00f6rg", "value": 1, "width": 1}, {"from": "Anna und Juliane", "to": "Attentat stets unsere Urlaube", "value": 1, "width": 1}, {"from": "Anna und Juliane", "to": "Nordsee", "value": 1, "width": 1}, {"from": "Anna und Juliane", "to": "Mick", "value": 1, "width": 1}, {"from": "Anna und Juliane", "to": "Kimi", "value": 1, "width": 1}, {"from": "Anna und Juliane", "to": "Ava", "value": 1, "width": 1}, {"from": "Anna und Juliane", "to": "Emma", "value": 1, "width": 1}, {"from": "Bruder Hans-J\u00f6rg", "to": "Attentat stets unsere Urlaube", "value": 1, "width": 1}, {"from": "Bruder Hans-J\u00f6rg", "to": "Nordsee", "value": 1, "width": 1}, {"from": "Bruder Hans-J\u00f6rg", "to": "Mick", "value": 1, "width": 1}, {"from": "Bruder Hans-J\u00f6rg", "to": "Kimi", "value": 1, "width": 1}, {"from": "Bruder Hans-J\u00f6rg", "to": "Ava", "value": 1, "width": 1}, {"from": "Bruder Hans-J\u00f6rg", "to": "Emma", "value": 1, "width": 1}, {"from": "Bruder Hans-J\u00f6rg", "to": "Offenburger", "value": 1, "width": 1}, {"from": "Attentat stets unsere Urlaube", "to": "Nordsee", "value": 1, "width": 1}, {"from": "Attentat stets unsere Urlaube", "to": "Mick", "value": 1, "width": 1}, {"from": "Attentat stets unsere Urlaube", "to": "Kimi", "value": 1, "width": 1}, {"from": "Attentat stets unsere Urlaube", "to": "Ava", "value": 1, "width": 1}, {"from": "Attentat stets unsere Urlaube", "to": "Emma", "value": 1, "width": 1}, {"from": "Nordsee", "to": "Mick", "value": 1, "width": 1}, {"from": "Nordsee", "to": "Kimi", "value": 1, "width": 1}, {"from": "Nordsee", "to": "Ava", "value": 1, "width": 1}, {"from": "Nordsee", "to": "Emma", "value": 1, "width": 1}, {"from": "Mick", "to": "Kimi", "value": 1, "width": 1}, {"from": "Mick", "to": "Ava", "value": 1, "width": 1}, {"from": "Mick", "to": "Emma", "value": 1, "width": 1}, {"from": "Kimi", "to": "Ava", "value": 1, "width": 1}, {"from": "Kimi", "to": "Emma", "value": 1, "width": 1}, {"from": "Ava", "to": "Emma", "value": 1, "width": 1}, {"from": "Dieses Jahr", "to": "Mama", "value": 1, "width": 1}, {"from": "Dieses Jahr", "to": "Sorgenrangliste", "value": 1, "width": 1}, {"from": "Mama", "to": "Sorgenrangliste", "value": 1, "width": 1}, {"from": "Dollenberg", "to": "Schwarzwald", "value": 1, "width": 1}, {"from": "Heilbronn", "to": "Sorgenliste", "value": 1, "width": 1}, {"from": "Heilbronn", "to": "Uwe Martens", "value": 1, "width": 1}, {"from": "Berlin", "to": "Bundestag", "value": 1, "width": 1}, {"from": "Bundestag", "to": "CDU", "value": 1, "width": 1}, {"from": "Bundestag", "to": "SPD", "value": 1, "width": 1}, {"from": "Du", "to": "Gerd", "value": 1, "width": 1}, {"from": "Du", "to": "Liebe Nicole", "value": 1, "width": 1}, {"from": "Gerd", "to": "Attentat", "value": 1, "width": 1}, {"from": "Gerd", "to": "Gengenbach", "value": 1, "width": 1}, {"from": "Attentat", "to": "Gengenbach", "value": 1, "width": 1}, {"from": "Burkhard Rose", "to": "Holger Schrott", "value": 1, "width": 1}, {"from": "Barbara Streck", "to": "Mein Papa", "value": 1, "width": 1}, {"from": "Barbara Streck", "to": "Schl\u00fcter", "value": 1, "width": 1}, {"from": "Mein Papa", "to": "Schl\u00fcter", "value": 1, "width": 1}, {"from": "Frieder Merz", "to": "Hans-Peter Repnik", "value": 1, "width": 1}, {"from": "Nicole Gudehus", "to": "Papas Engel", "value": 1, "width": 1}, {"from": "Nicole Gudehus", "to": "Du warst", "value": 1, "width": 1}, {"from": "Nicole Gudehus", "to": "Papas", "value": 1, "width": 1}, {"from": "Nicole Gudehus", "to": "Mamas", "value": 1, "width": 1}, {"from": "Papas Engel", "to": "Du warst", "value": 1, "width": 1}, {"from": "Papas Engel", "to": "Papas", "value": 1, "width": 1}, {"from": "Papas Engel", "to": "Mamas", "value": 1, "width": 1}, {"from": "Du warst", "to": "Papas", "value": 1, "width": 1}, {"from": "Du warst", "to": "Mamas", "value": 1, "width": 1}, {"from": "Papas", "to": "Mamas", "value": 1, "width": 1}, {"from": "Papas", "to": "Elke f\u00fchle", "value": 1, "width": 1}, {"from": "Nature Communications", "to": "Niederl\u00e4ndische", "value": 1, "width": 1}, {"from": "Brent Appelman", "to": "Long-Covid-Patienten", "value": 1, "width": 1}, {"from": "Long-Covid-Patienten", "to": "Zellunterg\u00e4ngen", "value": 1, "width": 1}, {"from": "Marc Wilmots", "to": "Portugal-Camp", "value": 1, "width": 1}, {"from": "Schalke-Boss!", "to": "Wilmots", "value": 1, "width": 1}, {"from": "Bundesliga", "to": "Kn\u00e4bel-Nachfolger", "value": 1, "width": 1}, {"from": "Andr\u00e9 Hechelmann", "to": "Belgien", "value": 1, "width": 1}, {"from": "Belgien", "to": "Nuri T.", "value": 1, "width": 1}, {"from": "Gerald Asamoah", "to": "Mike B\u00fcskens", "value": 1, "width": 1}, {"from": "Tim Rehbein", "to": "Yusuf Kabadayi", "value": 1, "width": 1}, {"from": "Tim Rehbein", "to": "K\u00f6nigsblau-Kollegen", "value": 1, "width": 1}, {"from": "Yusuf Kabadayi", "to": "K\u00f6nigsblau-Kollegen", "value": 1, "width": 1}, {"from": "Haan", "to": "S\u00e4ure-Anschlag", "value": 1, "width": 1}, {"from": "Haan", "to": "Wuppertal", "value": 1, "width": 1}, {"from": "Haan", "to": "NRW", "value": 1, "width": 1}, {"from": "Haan", "to": "Bernhard G\u00fcnther", "value": 1, "width": 1}, {"from": "S\u00e4ure-Anschlag", "to": "Nuri T.", "value": 1, "width": 1}, {"from": "S\u00e4ure-Anschlag", "to": "Wuppertal", "value": 1, "width": 1}, {"from": "S\u00e4ure-Anschlag", "to": "Maastricht", "value": 1, "width": 1}, {"from": "S\u00e4ure-Anschlag", "to": "Niederlande", "value": 1, "width": 1}, {"from": "Wuppertal", "to": "NRW", "value": 1, "width": 1}, {"from": "Wuppertal", "to": "Nuri T.", "value": 1, "width": 1}, {"from": "Wuppertal", "to": "Maastricht", "value": 1, "width": 1}, {"from": "Wuppertal", "to": "Niederlande", "value": 1, "width": 1}, {"from": "Marko L.", "to": "Nuri T.", "value": 1, "width": 1}, {"from": "Marko L.", "to": "Belastungszeuge Frank S.", "value": 1, "width": 1}, {"from": "Marko L.", "to": "Serbe", "value": 1, "width": 1}, {"from": "Marko L.", "to": "K\u00f6ln", "value": 1, "width": 1}, {"from": "Marko L.", "to": "Ringer-Wettkampf", "value": 1, "width": 1}, {"from": "Nuri T.", "to": "Maastricht", "value": 1, "width": 1}, {"from": "Nuri T.", "to": "Niederlande", "value": 1, "width": 1}, {"from": "Nuri T.", "to": "Hells Angels", "value": 1, "width": 1}, {"from": "Nuri T.", "to": "S\u00e4ure-Attentat", "value": 1, "width": 1}, {"from": "Frank S.", "to": "T.", "value": 1, "width": 1}, {"from": "Maastricht", "to": "Niederlande", "value": 1, "width": 1}, {"from": "Hells Angels", "to": "S\u00e4ure-Attentat", "value": 1, "width": 1}, {"from": "K\u00f6ln", "to": "Ringer-Wettkampf", "value": 1, "width": 1}, {"from": "Mario M.", "to": "Rennrodelbahn Oberhof", "value": 1, "width": 1}, {"from": "Eiskanal", "to": "sozialen", "value": 1, "width": 1}, {"from": "Oberhof", "to": "Opfers", "value": 1, "width": 1}, {"from": "Oberhof", "to": "Miriam M.", "value": 1, "width": 1}, {"from": "Opfers", "to": "Miriam M.", "value": 1, "width": 1}, {"from": "Erfurter", "to": "Juri Goldstein", "value": 1, "width": 1}, {"from": "Ice-Tubes", "to": "Rodelteam Suhl", "value": 1, "width": 1}, {"from": "Rutschring", "to": "Vierer-Bob", "value": 1, "width": 1}, {"from": "Rutschring", "to": "Rodelbahn", "value": 1, "width": 1}, {"from": "Vierer-Bob", "to": "Rodelbahn", "value": 1, "width": 1}, {"from": "Der eiskalte Engel", "to": "Film-Legende Alain Delon", "value": 1, "width": 1}, {"from": "Anthony Delon", "to": "Sohn", "value": 1, "width": 1}, {"from": "Anthony Delon", "to": "franz\u00f6sischen", "value": 1, "width": 1}, {"from": "Anthony Delon", "to": "Paris Match", "value": 1, "width": 1}, {"from": "Anthony Delon", "to": "Anouchka", "value": 1, "width": 1}, {"from": "Anthony Delon", "to": "Schwester Anouchka", "value": 1, "width": 1}, {"from": "Sohn", "to": "franz\u00f6sischen", "value": 1, "width": 1}, {"from": "Sohn", "to": "Paris Match", "value": 1, "width": 1}, {"from": "Sohn", "to": "Anouchka", "value": 1, "width": 1}, {"from": "Sohn", "to": "Alain Delon", "value": 1, "width": 1}, {"from": "Sohn", "to": "Sohnes", "value": 1, "width": 1}, {"from": "franz\u00f6sischen", "to": "Paris Match", "value": 1, "width": 1}, {"from": "franz\u00f6sischen", "to": "Anouchka", "value": 1, "width": 1}, {"from": "Paris Match", "to": "Anouchka", "value": 1, "width": 1}, {"from": "Anouchka", "to": "Anthony", "value": 1, "width": 1}, {"from": "Anouchka", "to": "Alain Delon", "value": 1, "width": 1}, {"from": "Alain Delon", "to": "Der Sohn des Film-Stars", "value": 1, "width": 1}, {"from": "Alain Delon", "to": "Anthony", "value": 1, "width": 1}, {"from": "Alain Delon", "to": "Japanerin", "value": 1, "width": 1}, {"from": "Alain Delon", "to": "Hiromi Rollin", "value": 1, "width": 1}, {"from": "Alain Delon", "to": "Sohnes", "value": 1, "width": 1}, {"from": "Hiromi Rollin", "to": "Japanerin", "value": 1, "width": 1}, {"from": "Delons", "to": "Rollin", "value": 1, "width": 1}, {"from": "Eurojackpot", "to": "Eurojackpot", "value": 1, "width": 1}, {"from": "EUROJACKPOT-Zahlen", "to": "Eurojackpot-Zahlen", "value": 1, "width": 1}, {"from": "Finnland", "to": "Helsinki", "value": 1, "width": 1}, {"from": "Gypsy-Rose Blanchard", "to": "Missouri", "value": 1, "width": 1}, {"from": "Gypsy-Rose", "to": "Monster-Mutter", "value": 1, "width": 1}, {"from": "Gypsy-Rose", "to": "M\u00e4rchen-Welten", "value": 1, "width": 1}, {"from": "Monster-Mutter", "to": "M\u00e4rchen-Welten", "value": 1, "width": 1}, {"from": "Amazon", "to": "The Act", "value": 1, "width": 1}, {"from": "Partei", "to": "Verfassungsschutzchef", "value": 1, "width": 1}, {"from": "Maa\u00dfen", "to": "WerteUnion", "value": 1, "width": 1}, {"from": "Maa\u00dfen", "to": "X", "value": 1, "width": 1}, {"from": "Maa\u00dfen", "to": "Union", "value": 1, "width": 1}, {"from": "Maa\u00dfen", "to": "CDU/CSU", "value": 1, "width": 1}, {"from": "Maa\u00dfen", "to": "AfD", "value": 1, "width": 1}, {"from": "Maa\u00dfen", "to": "W\u00e4hler-Schnittmenge", "value": 1, "width": 1}, {"from": "Maa\u00dfen", "to": "Maa\u00dfen-Partei", "value": 1, "width": 1}, {"from": "Maa\u00dfen", "to": "AfD.", "value": 1, "width": 1}, {"from": "Maa\u00dfen", "to": "AfD-W\u00e4hlern", "value": 1, "width": 1}, {"from": "Maa\u00dfen", "to": "Bundesamtes f\u00fcr Verfassungsschutz", "value": 1, "width": 1}, {"from": "WerteUnion", "to": "CDU", "value": 1, "width": 1}, {"from": "WerteUnion", "to": "CSU", "value": 1, "width": 1}, {"from": "CDU", "to": "CSU", "value": 1, "width": 1}, {"from": "CDU", "to": "SPD", "value": 1, "width": 1}, {"from": "Hermann Binkert", "to": "Maa\u00dfen-Partei", "value": 1, "width": 1}, {"from": "Hermann Binkert", "to": "INSA", "value": 1, "width": 1}, {"from": "Maa\u00dfen-Partei", "to": "INSA", "value": 1, "width": 1}, {"from": "Maa\u00dfen-Partei", "to": "AfD", "value": 5, "width": 1}, {"from": "Maa\u00dfen-Partei", "to": "Union", "value": 1, "width": 1}, {"from": "Maa\u00dfen-Partei", "to": "Binkert", "value": 1, "width": 1}, {"from": "Maa\u00dfen-Partei", "to": "CDU/CSU", "value": 4, "width": 1}, {"from": "Maa\u00dfen-Partei", "to": "CDU-Bundestagsabgeordnete", "value": 1, "width": 1}, {"from": "Maa\u00dfen-Partei", "to": "Christian Natterer", "value": 1, "width": 1}, {"from": "Maa\u00dfen-Partei", "to": "X", "value": 1, "width": 1}, {"from": "Maa\u00dfen-Partei", "to": "Twitter", "value": 1, "width": 1}, {"from": "Maa\u00dfen-Partei", "to": "BSW", "value": 1, "width": 1}, {"from": "Maa\u00dfen-Partei", "to": "B\u00fcndnis Sahra Wagenknecht", "value": 1, "width": 1}, {"from": "Maa\u00dfen-Partei", "to": "AfD.", "value": 3, "width": 1}, {"from": "Maa\u00dfen-Partei", "to": "AfD-W\u00e4hlern", "value": 1, "width": 1}, {"from": "Maa\u00dfen-Partei", "to": "Bundestagseinzug", "value": 1, "width": 1}, {"from": "Maa\u00dfen-Partei", "to": "Maa\u00dfen-Partei", "value": 1, "width": 1}, {"from": "AfD", "to": "CDU/CSU", "value": 6, "width": 1}, {"from": "AfD", "to": "Union", "value": 2, "width": 1}, {"from": "AfD", "to": "Binkert", "value": 2, "width": 1}, {"from": "AfD", "to": "CDU-Bundestagsabgeordnete", "value": 1, "width": 1}, {"from": "AfD", "to": "Christian Natterer", "value": 1, "width": 1}, {"from": "AfD", "to": "X", "value": 1, "width": 1}, {"from": "AfD", "to": "Twitter", "value": 1, "width": 1}, {"from": "AfD", "to": "BSW", "value": 1, "width": 1}, {"from": "AfD", "to": "B\u00fcndnis Sahra Wagenknecht", "value": 1, "width": 1}, {"from": "AfD", "to": "INSA-Analyse", "value": 1, "width": 1}, {"from": "AfD", "to": "W\u00e4hler-Schnittmenge", "value": 1, "width": 1}, {"from": "AfD", "to": "AfD.", "value": 1, "width": 1}, {"from": "CDU/CSU", "to": "CDU-Bundestagsabgeordnete", "value": 1, "width": 1}, {"from": "CDU/CSU", "to": "Christian Natterer", "value": 1, "width": 1}, {"from": "CDU/CSU", "to": "X", "value": 1, "width": 1}, {"from": "CDU/CSU", "to": "Twitter", "value": 1, "width": 1}, {"from": "CDU/CSU", "to": "BSW", "value": 1, "width": 1}, {"from": "CDU/CSU", "to": "B\u00fcndnis Sahra Wagenknecht", "value": 1, "width": 1}, {"from": "CDU/CSU", "to": "W\u00e4hler-Schnittmenge", "value": 1, "width": 1}, {"from": "CDU/CSU", "to": "Binkert", "value": 1, "width": 1}, {"from": "CDU/CSU", "to": "AfD.", "value": 1, "width": 1}, {"from": "Union", "to": "Binkert", "value": 1, "width": 1}, {"from": "Union", "to": "X", "value": 1, "width": 1}, {"from": "Union", "to": "INSA-Analyse", "value": 1, "width": 1}, {"from": "CDU-Bundestagsabgeordnete", "to": "Christian Natterer", "value": 1, "width": 1}, {"from": "CDU-Bundestagsabgeordnete", "to": "X", "value": 1, "width": 1}, {"from": "CDU-Bundestagsabgeordnete", "to": "Twitter", "value": 1, "width": 1}, {"from": "CDU-Bundestagsabgeordnete", "to": "BSW", "value": 1, "width": 1}, {"from": "CDU-Bundestagsabgeordnete", "to": "B\u00fcndnis Sahra Wagenknecht", "value": 1, "width": 1}, {"from": "Christian Natterer", "to": "X", "value": 1, "width": 1}, {"from": "Christian Natterer", "to": "Twitter", "value": 1, "width": 1}, {"from": "Christian Natterer", "to": "BSW", "value": 1, "width": 1}, {"from": "Christian Natterer", "to": "B\u00fcndnis Sahra Wagenknecht", "value": 1, "width": 1}, {"from": "X", "to": "Twitter", "value": 1, "width": 1}, {"from": "X", "to": "BSW", "value": 1, "width": 1}, {"from": "X", "to": "B\u00fcndnis Sahra Wagenknecht", "value": 1, "width": 1}, {"from": "Twitter", "to": "BSW", "value": 1, "width": 1}, {"from": "Twitter", "to": "B\u00fcndnis Sahra Wagenknecht", "value": 1, "width": 1}, {"from": "BSW", "to": "B\u00fcndnis Sahra Wagenknecht", "value": 1, "width": 1}, {"from": "CDU-Europa-Abgeordnete", "to": "Dennis Radtke", "value": 1, "width": 1}, {"from": "CDU-Europa-Abgeordnete", "to": "Maa\u00dfen-Ank\u00fcndigung", "value": 1, "width": 1}, {"from": "Dennis Radtke", "to": "Maa\u00dfen-Ank\u00fcndigung", "value": 1, "width": 1}, {"from": "AfD.", "to": "AfD-W\u00e4hlern", "value": 1, "width": 1}, {"from": "Otzberg", "to": "Witta Pohl", "value": 1, "width": 1}, {"from": "Otzberg", "to": "S\u00fcdhessen", "value": 1, "width": 1}, {"from": "Otzberg", "to": "Darmstadt", "value": 1, "width": 1}, {"from": "Familie Drombusch", "to": "ZDF", "value": 1, "width": 1}, {"from": "Pohl", "to": "Vera Drombusch", "value": 1, "width": 1}, {"from": "Bundenm\u00fchle", "to": "Odenwald-Ortes", "value": 1, "width": 1}, {"from": "G\u00fcnther Strack", "to": "Onkel Ludwig", "value": 1, "width": 1}, {"from": "G\u00fcnther Strack", "to": "Alte M\u00fchle", "value": 1, "width": 1}, {"from": "Onkel Ludwig", "to": "Alte M\u00fchle", "value": 1, "width": 1}, {"from": "Pappmach\u00e9-Kulissen", "to": "Sandstein-Fachwerk-Bau", "value": 1, "width": 1}, {"from": "Alten M\u00fchle", "to": "Zustandes Lebensgefahr!", "value": 1, "width": 1}, {"from": "S\u00fcdhessen", "to": "Darmstadt", "value": 1, "width": 1}, {"from": "Gro\u00df-Gerau", "to": "THW", "value": 1, "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+                    network.on("selectNode", neighbourhoodHighlight);
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
